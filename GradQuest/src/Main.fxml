@@ -1,8 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1">
-    <!-- TODO Add Nodes -->
+<AnchorPane prefHeight="800.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.MainController">
+   <children>
+      <Pane fx:id="mainPane" prefHeight="800.0" prefWidth="800.0" style="-fx-background-color: #898887;">
+         <children>
+            <Label fx:id="mainTitle" layoutX="125.0" layoutY="146.0" style="-fx-background-color: black; -fx-border-color: #926239; -fx-border-width: 10;" text="Grad Quest" textFill="WHITE">
+               <font>
+                  <Font name="American Typewriter Bold" size="96.0" />
+               </font>
+            </Label>
+            <Button fx:id="newGame" layoutX="300.0" layoutY="400.0" mnemonicParsing="false" onAction="#handle" prefHeight="100.0" prefWidth="200.0" text="New Game" textAlignment="CENTER">
+               <font>
+                  <Font name="Arial" size="24.0" />
+               </font>
+            </Button>
+            <Button fx:id="exit" layoutX="300.0" layoutY="531.0" mnemonicParsing="false" onAction="#exitGame" prefHeight="100.0" prefWidth="200.0" text="Exit" textAlignment="CENTER">
+               <font>
+                  <Font name="Arial" size="24.0" />
+               </font>
+            </Button>
+         </children>
+      </Pane>
+   </children>
 </AnchorPane>
-

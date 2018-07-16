@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="800.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.IntroController">
+   <children>
+      <Pane fx:id="introPane" prefHeight="800.0" prefWidth="800.0" style="-fx-background-color: #898887;">
+         <children>
+            <TextArea fx:id="introTextArea" layoutX="50.0" layoutY="50.0" prefHeight="700.0" prefWidth="700.0" text="TODO: Add initial story info or other content to this scene." />
+            <MenuButton fx:id="introMenu" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Menu">
+              <items>
+                <MenuItem fx:id="menuItemMain" mnemonicParsing="false" onAction="#handle" text="Main Menu" />
+                <MenuItem fx:id="menuItemExit" mnemonicParsing="false" onAction="#exitGame" text="Exit" />
+              </items>
+            </MenuButton>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
