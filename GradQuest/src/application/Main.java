@@ -6,6 +6,10 @@ import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 
+/**
+ * @author Rafael Rodriguez - mat574
+ *
+ */
 public class Main extends Application {
     
     public static Stage stage;

@@ -8,6 +8,10 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.Pane;
 
+/**
+ * @author Rafael Rodriguez - mat574
+ *
+ */
 public class IntroController implements EventHandler<ActionEvent>{
 
     

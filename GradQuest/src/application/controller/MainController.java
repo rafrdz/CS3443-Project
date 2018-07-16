@@ -14,6 +14,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
+/**
+ * @author Rafael Rodriguez - mat574
+ *
+ */
 public class MainController implements EventHandler<ActionEvent>{
     
     @FXML
