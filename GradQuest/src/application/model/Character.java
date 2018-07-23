@@ -1,13 +1,30 @@
 package application.model;
 
+import javafx.scene.shape.Rectangle;
+
 /**
  * @author Rafael Rodriguez - mat574
  *
  */
-public interface Character {
+public abstract class Character {
     
-    public int hitPoints = 10;
-    public int damage = 1;
-    public double movementSpeed = 5.0;
+    // Character position
+    private float xPos, yPos;
+    
+    // Character dimensions
+    public static int width = 50;
+    public static int height = 50;
+    
+    // Character hitbox
+    private Rectangle hitbox;
+    
+    public Character(float x, float y) {
+        this.xPos = x;
+        this.yPos = y;
+        this.hitbox = new Rectangle(0, 0, width, height);
+    }
+    
+    public abstract void update();
+    public abstract void display();
 
 }

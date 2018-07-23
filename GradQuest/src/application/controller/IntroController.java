@@ -23,7 +23,7 @@ import javafx.stage.Stage;
  * @author Rafael Rodriguez - mat574
  *
  */
-public class IntroController implements EventHandler<ActionEvent>, Initializable{
+public class IntroController implements EventHandler<ActionEvent>, Initializable {
 
     
     @FXML
