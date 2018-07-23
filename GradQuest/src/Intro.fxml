@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
@@ -9,13 +11,82 @@
    <children>
       <Pane fx:id="introPane" prefHeight="800.0" prefWidth="800.0" style="-fx-background-color: #898887;">
          <children>
-            <TextArea fx:id="introTextArea" layoutX="50.0" layoutY="50.0" prefHeight="700.0" prefWidth="700.0" text="TODO: Add initial story info or other content to this scene." />
-            <MenuButton fx:id="introMenu" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Menu">
-              <items>
-                <MenuItem fx:id="menuItemMain" mnemonicParsing="false" onAction="#handle" text="Main Menu" />
-                <MenuItem fx:id="menuItemExit" mnemonicParsing="false" onAction="#exitGame" text="Exit" />
-              </items>
-            </MenuButton>
+            <TextArea fx:id="descriptionTextArea" editable="false" layoutX="50.0" layoutY="114.0" prefHeight="290.0" prefWidth="700.0" text="Welcome to Grad Quest!&#10;You are an amibitous student who sets out to pursue a degree in your chose field. Along the way, you will have to avoid a treacherous terrain consisting of high interest loans, professors with low scores on RateMyProf, and 8 AM classes. Will you be able to survive with a job as a barista, $15 in your checking account, and a pack of Top Ramen, or will you meet your demise at the hands of Sallie Mae?&#10;" wrapText="true">
+               <font>
+                  <Font name="Calibri" size="24.0" />
+               </font></TextArea>
+            <Button fx:id="homeButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#handle" prefHeight="20.0" prefWidth="50.0" text="Home" />
+            <Button fx:id="exitButton" layoutX="736.0" layoutY="14.0" mnemonicParsing="false" onAction="#exitGame" prefHeight="20.0" prefWidth="50.0" text="Exit" />
+            <Label fx:id="descriptionLabel" layoutX="50.0" layoutY="61.0" text="Description" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Label>
+            <Label fx:id="controlsLabel" layoutX="50.0" layoutY="419.0" text="Controls" textFill="WHITE">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Label>
+            <Rectangle fx:id="wShape" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="70.0" layoutX="172.0" layoutY="480.0" stroke="BLACK" strokeType="INSIDE" width="70.0" />
+            <Rectangle fx:id="sShape" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="70.0" layoutX="172.0" layoutY="573.0" stroke="BLACK" strokeType="INSIDE" width="70.0" />
+            <Rectangle fx:id="dShape" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="70.0" layoutX="270.0" layoutY="573.0" stroke="BLACK" strokeType="INSIDE" width="70.0" />
+            <Rectangle fx:id="aShape" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="70.0" layoutX="82.0" layoutY="573.0" stroke="BLACK" strokeType="INSIDE" width="70.0" />
+            <Rectangle fx:id="spaceShape" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="70.0" layoutX="361.0" layoutY="573.0" stroke="BLACK" strokeType="INSIDE" width="400.0" />
+            <Label fx:id="wText" layoutX="190.0" layoutY="489.0" text="W">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Label>
+            <Label fx:id="aText" layoutX="105.0" layoutY="582.0" text="A">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Label>
+            <Label fx:id="sText" layoutX="197.0" layoutY="582.0" text="S">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Label>
+            <Label fx:id="dText" layoutX="292.0" layoutY="582.0" text="D">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Label>
+            <Label fx:id="spaceText" layoutX="514.0" layoutY="582.0" text="Space">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Label>
+            <Label fx:id="wLabel" layoutX="251.0" layoutY="454.0" text="W: Move Up">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="aLabel" layoutX="16.0" layoutY="533.0" text="A: Move Left">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="sLabel" layoutX="131.0" layoutY="653.0" text="S: Move Down">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="dLabel" layoutX="270.0" layoutY="533.0" text="D: Move Right">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="spaceLabel" layoutX="561.0" layoutY="533.0" text="Space: Fire">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Button fx:id="startButton" layoutX="325.0" layoutY="711.0" mnemonicParsing="false" onAction="#startGame" text="Start Game">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Button>
          </children>
       </Pane>
    </children>
