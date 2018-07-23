@@ -1,0 +1,35 @@
+﻿Room Files
+----------
+-CSV file containing room number, and either 1, 2, or 3 (depending on level of difficulty), spawn locations for enemies
+-Level of difficulty should be selected at the intro screen before a user starts a game
+-Room file/data will be loaded when the player moves the to next/previous room (data can either be loaded via a new scene, or can rewrite over the same scene)
+-Example
+        -Room 1
+        -Enemy 1, XLocation 500, YLocation 450
+        -Enemy 2, XLocation, 720, YLocation 350
+        -Enemy 3, XLocation, 275, YLocation 150
+
+
+High Score
+----------
+-Use a "debt counter" (either via a running timer that counts the number of seconds that it takes for the player to win, or via an end time - start time calculation)
+-Upon completion, prompt the player to enter their name and save their name and high score to highscores.csv (alternative idea, allow player to enter name at intro screen and eliminate the need for a prompt)
+-Send player to high scores view after the game
+-Display the high scores from a "high scores" button the home screen (listview with name, score, and rank)
+
+
+Character Classes
+-----------------
+-Character class containing common information (location information, movement speed, damage, hitpoints, etc)
+-Player class defines the variables for the player (damage, hitpoints, etc)
+-Enemy class defines the variables for the enemy (damage, hitpoints, etc)
+-Boss class defines the variables for the boss (damage, hitpoints, etc)
+
+
+Animation
+---------
+-Allow for user input (W, A, S, D, Spacebar) to move and shoot the player character
+-Player character will fire pencils as projectiles
+-Enemies will fire blips as projectiles
+-Need to implement collision detection (player damages enemy, player damages boss, enemy damages player, boss damages player, destroy projectile on impact with character or reaching edge of room)
+-Display player, enemy, and boss health on ui?
