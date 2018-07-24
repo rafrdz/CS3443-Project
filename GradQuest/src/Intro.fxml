@@ -7,84 +7,84 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="800.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.IntroController">
+<AnchorPane prefHeight="500.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.IntroController">
    <children>
-      <Pane fx:id="introPane" prefHeight="800.0" prefWidth="800.0" style="-fx-background-color: #898887;">
+      <Pane fx:id="introPane" prefHeight="500.0" prefWidth="500.0">
          <children>
-            <TextArea fx:id="descriptionTextArea" editable="false" layoutX="50.0" layoutY="114.0" prefHeight="290.0" prefWidth="700.0" text="Welcome to Grad Quest!&#10;You are an amibitous student who sets out to pursue a degree in your chose field. Along the way, you will have to avoid a treacherous terrain consisting of high interest loans, professors with low scores on RateMyProf, and 8 AM classes. Will you be able to survive with a job as a barista, $15 in your checking account, and a pack of Top Ramen, or will you meet your demise at the hands of Sallie Mae?&#10;" wrapText="true">
+            <TextArea fx:id="descriptionTextArea" editable="false" layoutX="26.0" layoutY="56.0" prefHeight="165.0" prefWidth="450.0" text="Welcome to Grad Quest!&#10;You are an amibitous student who sets out to pursue a degree in your chosen field. Along the way, you will have to avoid a treacherous terrain consisting of high interest loans, professors with low scores on RateMyProf, and 8 AM classes. Will you be able to survive with a job as a barista, $15 in your checking account, and a pack of Top Ramen, or will you meet your demise at the hands of Sallie Mae?&#10;" wrapText="true">
                <font>
-                  <Font name="Calibri" size="24.0" />
+                  <Font name="Arial" size="14.0" />
                </font></TextArea>
-            <Button fx:id="homeButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#handle" prefHeight="20.0" prefWidth="50.0" text="Home" />
-            <Button fx:id="exitButton" layoutX="736.0" layoutY="14.0" mnemonicParsing="false" onAction="#exitGame" prefHeight="20.0" prefWidth="50.0" text="Exit" />
-            <Label fx:id="descriptionLabel" layoutX="50.0" layoutY="61.0" text="Description" textAlignment="CENTER" textFill="WHITE">
+            <Button fx:id="homeButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#handle" prefHeight="20.0" prefWidth="60.0" text="Home" />
+            <Button fx:id="exitButton" layoutX="436.0" layoutY="14.0" mnemonicParsing="false" onAction="#exitGame" prefHeight="20.0" prefWidth="50.0" text="Exit" />
+            <Label fx:id="descriptionLabel" layoutX="186.0" layoutY="27.0" text="Description" textAlignment="CENTER">
                <font>
-                  <Font size="36.0" />
+                  <Font name="Arial" size="24.0" />
                </font>
             </Label>
-            <Label fx:id="controlsLabel" layoutX="50.0" layoutY="419.0" text="Controls" textFill="WHITE">
+            <Label fx:id="controlsLabel" layoutX="201.0" layoutY="237.0" text="Controls">
                <font>
-                  <Font size="36.0" />
+                  <Font name="Arial" size="24.0" />
                </font>
             </Label>
-            <Rectangle fx:id="wShape" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="70.0" layoutX="172.0" layoutY="480.0" stroke="BLACK" strokeType="INSIDE" width="70.0" />
-            <Rectangle fx:id="sShape" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="70.0" layoutX="172.0" layoutY="573.0" stroke="BLACK" strokeType="INSIDE" width="70.0" />
-            <Rectangle fx:id="dShape" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="70.0" layoutX="270.0" layoutY="573.0" stroke="BLACK" strokeType="INSIDE" width="70.0" />
-            <Rectangle fx:id="aShape" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="70.0" layoutX="82.0" layoutY="573.0" stroke="BLACK" strokeType="INSIDE" width="70.0" />
-            <Rectangle fx:id="spaceShape" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="70.0" layoutX="361.0" layoutY="573.0" stroke="BLACK" strokeType="INSIDE" width="400.0" />
-            <Label fx:id="wText" layoutX="190.0" layoutY="489.0" text="W">
+            <Rectangle fx:id="wShape" arcHeight="5.0" arcWidth="5.0" fill="#bbbbbb" height="40.0" layoutX="142.0" layoutY="283.0" stroke="BLACK" strokeType="INSIDE" width="40.0" />
+            <Rectangle fx:id="sShape" arcHeight="5.0" arcWidth="5.0" fill="#bbbbbb" height="40.0" layoutX="94.0" layoutY="328.0" stroke="BLACK" strokeType="INSIDE" width="40.0" />
+            <Rectangle fx:id="dShape" arcHeight="5.0" arcWidth="5.0" fill="#bbbbbb" height="40.0" layoutX="189.0" layoutY="328.0" stroke="BLACK" strokeType="INSIDE" width="40.0" />
+            <Rectangle fx:id="aShape" arcHeight="5.0" arcWidth="5.0" fill="#bbbbbb" height="40.0" layoutX="142.0" layoutY="328.0" stroke="BLACK" strokeType="INSIDE" width="40.0" />
+            <Rectangle fx:id="spaceShape" arcHeight="5.0" arcWidth="5.0" fill="#bbbbbb" height="40.0" layoutX="252.0" layoutY="328.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
+            <Label fx:id="wText" layoutX="155.0" layoutY="294.0" text="W">
                <font>
-                  <Font size="36.0" />
+                  <Font name="Arial" size="14.0" />
                </font>
             </Label>
-            <Label fx:id="aText" layoutX="105.0" layoutY="582.0" text="A">
+            <Label fx:id="aText" layoutX="109.0" layoutY="339.0" text="A">
                <font>
-                  <Font size="36.0" />
+                  <Font name="Arial" size="14.0" />
                </font>
             </Label>
-            <Label fx:id="sText" layoutX="197.0" layoutY="582.0" text="S">
+            <Label fx:id="sText" layoutX="158.0" layoutY="339.0" text="S">
                <font>
-                  <Font size="36.0" />
+                  <Font name="Arial" size="14.0" />
                </font>
             </Label>
-            <Label fx:id="dText" layoutX="292.0" layoutY="582.0" text="D">
+            <Label fx:id="dText" layoutX="204.0" layoutY="339.0" text="D">
                <font>
-                  <Font size="36.0" />
+                  <Font name="Arial" size="14.0" />
                </font>
             </Label>
-            <Label fx:id="spaceText" layoutX="514.0" layoutY="582.0" text="Space">
+            <Label fx:id="spaceText" layoutX="331.0" layoutY="339.0" text="Space">
                <font>
-                  <Font size="36.0" />
+                  <Font name="Arial" size="14.0" />
                </font>
             </Label>
-            <Label fx:id="wLabel" layoutX="251.0" layoutY="454.0" text="W: Move Up">
+            <Label fx:id="aLabel" layoutX="47.0" layoutY="303.0" text="A: Move Left">
                <font>
-                  <Font size="24.0" />
+                  <Font name="Arial" size="14.0" />
                </font>
             </Label>
-            <Label fx:id="aLabel" layoutX="16.0" layoutY="533.0" text="A: Move Left">
+            <Label fx:id="sLabel" layoutX="114.0" layoutY="368.0" text="S: Move Down">
                <font>
-                  <Font size="24.0" />
+                  <Font name="Arial" size="14.0" />
                </font>
             </Label>
-            <Label fx:id="sLabel" layoutX="131.0" layoutY="653.0" text="S: Move Down">
+            <Label fx:id="dLabel" layoutX="189.0" layoutY="303.0" text="D: Move Right">
                <font>
-                  <Font size="24.0" />
+                  <Font name="Arial" size="14.0" />
                </font>
             </Label>
-            <Label fx:id="dLabel" layoutX="270.0" layoutY="533.0" text="D: Move Right">
+            <Label fx:id="spaceLabel" layoutX="308.0" layoutY="303.0" text="Space: Fire">
                <font>
-                  <Font size="24.0" />
+                  <Font name="Arial" size="14.0" />
                </font>
             </Label>
-            <Label fx:id="spaceLabel" layoutX="561.0" layoutY="533.0" text="Space: Fire">
+            <Label fx:id="wLabel" layoutX="118.0" layoutY="266.0" text="W: Move Up">
                <font>
-                  <Font size="24.0" />
+                  <Font name="Arial" size="14.0" />
                </font>
             </Label>
-            <Button fx:id="startButton" layoutX="325.0" layoutY="711.0" mnemonicParsing="false" onAction="#startGame" text="Start Game">
+            <Button fx:id="startButton" layoutX="202.0" layoutY="420.0" mnemonicParsing="false" onAction="#startGame" text="Start Game">
                <font>
-                  <Font size="24.0" />
+                  <Font name="Arial" size="14.0" />
                </font>
             </Button>
          </children>

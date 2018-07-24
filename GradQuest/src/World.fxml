@@ -1,19 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="800.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="500.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.WorldController">
    <children>
-      <Pane fx:id="worldPane" prefHeight="800.0" prefWidth="800.0">
+      <Pane fx:id="worldPane" prefHeight="500.0" prefWidth="500.0">
          <children>
-            <ImageView fx:id="charImageView" fitHeight="50.0" fitWidth="50.0" layoutX="381.0" layoutY="375.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="playerImage" fitHeight="50.0" fitWidth="50.0" layoutX="39.0" layoutY="409.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/down1.png" />
                </image>
             </ImageView>
+            <Label fx:id="roomLabel" layoutX="15.0" layoutY="14.0" prefHeight="17.0" prefWidth="54.0" text="Room: 1" />
+            <Label fx:id="debtLabel" layoutX="337.0" layoutY="14.0" text="Student Debt: $100,000" />
          </children></Pane>
    </children>
 </AnchorPane>
