@@ -25,6 +25,7 @@ public abstract class Character {
     }
     
     public abstract void update();
+    public abstract void render();
     public abstract void display();
 
 }
