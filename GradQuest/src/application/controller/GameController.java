@@ -3,23 +3,26 @@ package application.controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.SplitPane;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyEvent;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 
-public class GameController implements EventHandler<KeyEvent>, Initializable{
+/**
+ * @author Rafael Rodriguez - mat574
+ *
+ */
+public class GameController implements Initializable{
+    
+    @FXML
+    AnchorPane mainPane;
     
     @FXML
     SplitPane splitPane;
-    
-    @FXML
-    AnchorPane topPane, bottomPane;
     
     @FXML
     GridPane gridPane;
@@ -31,14 +34,14 @@ public class GameController implements EventHandler<KeyEvent>, Initializable{
     ImageView playerImage;
 
     @Override
-    public void handle(KeyEvent event) {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
     public void initialize(URL location, ResourceBundle resources) {
-        gridPane.getStyleClass().add("gridLines");
+        // TODO: Load the room based on room number and difficulty
+        
+        // TODO: Start the debt clock
+    }
+    
+    public static void catchKey(KeyCode key) {
+        System.out.println(key.toString() + " has been pressed");
     }
 
 }

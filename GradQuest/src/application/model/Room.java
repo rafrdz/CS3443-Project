@@ -5,6 +5,10 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * @author Rafael Rodriguez - mat574
+ *
+ */
 public class Room {
     
     private int roomNumber;

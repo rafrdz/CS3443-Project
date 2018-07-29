@@ -7,10 +7,15 @@ import application.Main;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
@@ -53,7 +58,22 @@ public class IntroController implements EventHandler<ActionEvent>, Initializable
     }
     
     public void startGame() {
-        Main.moveToNextView("../Game.fxml");
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Main.class.getResource("../Game.fxml"));
+            AnchorPane layout = (AnchorPane) loader.load();
+            Scene scene = new Scene(layout);
+            scene.addEventFilter(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
+                public void handle(KeyEvent event) {
+                    KeyCode keyCode = event.getCode();
+                    GameController.catchKey(keyCode);
+                }
+            });
+            Main.mainStage.setScene(scene);
+            Main.mainStage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }
