@@ -4,7 +4,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import application.constants.PlayerAnimationConstants;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -12,17 +11,21 @@ import javafx.scene.control.SplitPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+
+/**
+ * @author Rafael Rodriguez - mat574
+ * @author David Brenner
+ */
 
 public class GameController implements Initializable{
     
     @FXML
-    SplitPane splitPane;
+    AnchorPane mainPane;
     
     @FXML
-    AnchorPane topPane, bottomPane;
+    SplitPane splitPane;
     
     @FXML
     GridPane gridPane;
