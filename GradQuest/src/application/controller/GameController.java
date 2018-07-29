@@ -16,7 +16,7 @@ import javafx.scene.layout.GridPane;
 
 /**
  * @author Rafael Rodriguez - mat574
- * @author David Brenner
+ * @author David Brenner - iqc287
  */
 
 public class GameController implements Initializable{
@@ -46,7 +46,7 @@ public class GameController implements Initializable{
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        gridPane.getStyleClass().add("gridLines");
+        getUserInfo();
         down0.setImage(new Image(PlayerAnimationConstants.PLAYER_DOWN0));
         down1.setImage(new Image(PlayerAnimationConstants.PLAYER_DOWN1));
         down2.setImage(new Image(PlayerAnimationConstants.PLAYER_DOWN2));
@@ -63,6 +63,10 @@ public class GameController implements Initializable{
         left1.setImage(new Image(PlayerAnimationConstants.PLAYER_LEFT1));
         left2.setImage(new Image(PlayerAnimationConstants.PLAYER_LEFT2));
         
+    }
+    
+    public void getUserInfo() {
+        playerLabel.setText(IntroController.currentUser.getName());
     }
 
 }

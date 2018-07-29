@@ -87,8 +87,8 @@
                   <Font name="Arial" size="14.0" />
                </font>
             </Button>
-            <Label layoutX="212.0" layoutY="403.0" text="Username:" />
-            <TextField layoutX="163.0" layoutY="422.0" />
+            <Label fx:id="usernameLabel" layoutX="212.0" layoutY="403.0" text="Username:" />
+            <TextField fx:id="usernameInput" layoutX="163.0" layoutY="422.0" />
          </children>
       </Pane>
    </children>
