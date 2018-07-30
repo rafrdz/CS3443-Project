@@ -87,8 +87,10 @@
                   <Font name="Arial" size="14.0" />
                </font>
             </Button>
-            <Label layoutX="212.0" layoutY="403.0" text="Username:" />
-            <TextField layoutX="163.0" layoutY="422.0" />
+            <Label fx:id="usernameLabel" layoutX="122.0" layoutY="403.0" text="Username:" />
+            <TextField fx:id="usernameInput" layoutX="72.0" layoutY="420.0" />
+            <Label fx:id="difficultyLabel" layoutX="341.0" layoutY="403.0" text="Difficulty:" />
+            <ChoiceBox fx:id="difficultyPicker" layoutX="296.0" layoutY="420.0" prefWidth="150.0" />
          </children>
       </Pane>
    </children>

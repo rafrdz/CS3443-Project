@@ -1,5 +1,11 @@
 package application.model;
 
+/**
+ * Model for the user object
+ * 
+ * @author Rafael Rodriguez - mat574
+ *
+ */
 public class User {
     
     private String name;
@@ -10,10 +16,9 @@ public class User {
     }
     
     public String toString() {
-        StringBuilder ret = new StringBuilder();
-        
-        ret.append( name );
-        return ret.toString();
+        String retString = "";
+        retString += "Name: " + this.getName() + " High Score: " + this.getHighScore();
+        return retString;
     }
 
     public String getName() {
