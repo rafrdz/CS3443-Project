@@ -4,6 +4,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import application.Main;
+import application.model.Room;
+import application.model.RoomView;
 import application.model.User;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -12,6 +14,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -23,74 +26,118 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 /**
+ * Displays story information, introduces the user to the controls, prompts the
+ * user to enter their name, and starts the game.
+ * 
  * @author Rafael Rodriguez - mat574
  *
  */
 public class IntroController implements EventHandler<ActionEvent>, Initializable {
 
-    
     @FXML
     private Pane introPane;
-    
+
     @FXML
     private TextArea descriptionTextArea;
-    
+
     @FXML
     private Button homeButton, exitButton, startButton;
 
     @FXML
-    private Label descriptionLabel, controlsLabel, wText, aText, sText, dText, spaceText, wLabel, aLabel, sLabel, dLabel, spaceLabel, usernameLabel;
+    private Label descriptionLabel, controlsLabel, wText, aText, sText, dText, spaceText, wLabel, aLabel, sLabel,
+            dLabel, spaceLabel, usernameLabel, difficultyLabel;
 
     @FXML
     private Rectangle wShape, sShape, dShape, aShape, spaceShape;
-    
+
     @FXML
     private TextField usernameInput;
     
+    @FXML
+    private ChoiceBox difficultyPicker;
+
     public static User currentUser;
     
+    public static String difficulty;
+    
+    public static Room room;
+    
+    public static RoomView roomView;
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see javafx.fxml.Initializable#initialize(java.net.URL,
+     * java.util.ResourceBundle)
+     */
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         descriptionTextArea.setEditable(false);
+        buildDifficultyOptions();
     }
-    
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see javafx.event.EventHandler#handle(javafx.event.Event)
+     */
     @Override
     public void handle(ActionEvent event) {
         Main.moveToNextView("../Main.fxml");
     }
-    
+
+    /**
+     * Exits the application
+     */
     public void exitGame() {
         Stage stage = (Stage) exitButton.getScene().getWindow();
         stage.close();
     }
-    
+
+    /**
+     * Sets the current user and starts the game
+     */
     public void startGame() {
-        if(validateUserInput(usernameInput.getText())) {
+        if (validateUserInput(usernameInput.getText())) {
             currentUser = new User(usernameInput.getText());
         }
+        difficulty = difficultyPicker.getValue().toString();
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource("../Game.fxml"));
             AnchorPane layout = (AnchorPane) loader.load();
+            
+            room = Room.loadRoomData(difficulty, 1);
+            roomView = new RoomView(room);
+            layout.getChildren().add(roomView);
+            
             Scene scene = new Scene(layout);
-            scene.addEventFilter(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
-                public void handle(KeyEvent event) {
-                    KeyCode keyCode = event.getCode();
-                    GameController.catchKey(keyCode);
-                }
-            });
+            scene.setOnKeyPressed(new GameController());
             Main.mainStage.setScene(scene);
             Main.mainStage.show();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    
-    public boolean validateUserInput(String name) {
-        if(!(name.isEmpty())) {
+
+    /**
+     * Validates the user input
+     * 
+     * @param name
+     *            - The user input
+     * @return - Whether or not the input is valid
+     */
+    private boolean validateUserInput(String name) {
+        if (!(name.isEmpty())) {
             return true;
         }
         return false;
+    }
+    
+    private void buildDifficultyOptions() {
+        difficultyPicker.getItems().removeAll(difficultyPicker.getItems());
+        difficultyPicker.getItems().addAll("Easy", "Medium", "Hard");
+        difficultyPicker.getSelectionModel().select("Easy");
     }
 
 }

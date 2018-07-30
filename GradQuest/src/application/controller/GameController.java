@@ -4,22 +4,27 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import application.constants.PlayerAnimationConstants;
+import application.model.Room;
+import application.model.RoomView;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.SplitPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 
 /**
+ * Class that handles displaying all of the game information and acting on user input
+ * 
  * @author Rafael Rodriguez - mat574
  * @author David Brenner - iqc287
  */
 
-public class GameController implements Initializable{
+public class GameController implements EventHandler<KeyEvent>, Initializable{
     
     @FXML
     AnchorPane mainPane;
@@ -39,10 +44,10 @@ public class GameController implements Initializable{
     up0,up1,up2,
     right0,right1,right2,
     left0,left1,left2;
-
-    public static void catchKey(KeyCode key) {
-        System.out.println(key.toString() + " has been pressed");
-    }
+    
+    public static Room room;
+    
+    public static RoomView roomView;
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -65,7 +70,25 @@ public class GameController implements Initializable{
         
     }
     
-    public void getUserInfo() {
+    @Override
+    public void handle(KeyEvent event) {
+        String keyPressed = event.getCode().toString();
+        System.out.println(keyPressed);
+    }
+    
+    public void moveToRoom2(String difficulty) {
+        // TODO: Allow user to move to room 2
+        room = Room.loadRoomData(difficulty, 2);
+        roomView = new RoomView(room);
+    }
+    
+    public void moveToRoom3(String difficulty) {
+        // TODO: Allow user to move to room 3
+        room = Room.loadRoomData(difficulty, 2);
+        roomView = new RoomView(room);
+    }
+    
+    private void getUserInfo() {
         playerLabel.setText(IntroController.currentUser.getName());
     }
 
