@@ -52,28 +52,28 @@ public class GameController implements EventHandler<KeyEvent>, Initializable{
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         getUserInfo();
-        down0.setImage(new Image(PlayerAnimationConstants.PLAYER_DOWN0));
-        down1.setImage(new Image(PlayerAnimationConstants.PLAYER_DOWN1));
-        down2.setImage(new Image(PlayerAnimationConstants.PLAYER_DOWN2));
-        
-        up0.setImage(new Image(PlayerAnimationConstants.PLAYER_UP0));
-        up1.setImage(new Image(PlayerAnimationConstants.PLAYER_UP1));
-        up2.setImage(new Image(PlayerAnimationConstants.PLAYER_UP2));
-        
-        right0.setImage(new Image(PlayerAnimationConstants.PLAYER_RIGHT0));
-        right1.setImage(new Image(PlayerAnimationConstants.PLAYER_RIGHT1));
-        right2.setImage(new Image(PlayerAnimationConstants.PLAYER_RIGHT2));
-        
-        left0.setImage(new Image(PlayerAnimationConstants.PLAYER_LEFT0));
-        left1.setImage(new Image(PlayerAnimationConstants.PLAYER_LEFT1));
-        left2.setImage(new Image(PlayerAnimationConstants.PLAYER_LEFT2));
-        
+        room = IntroController.room;
+        System.out.println("Room has been initialized! " + room);
     }
     
     @Override
     public void handle(KeyEvent event) {
-        String keyPressed = event.getCode().toString();
+        char keyPressed = event.getCode().toString().charAt(0);
         System.out.println(keyPressed);
+        switch(keyPressed) {
+        case 'W':
+            room.moveUp();
+            break;
+        case 'A':
+            room.moveLeft();
+            break;
+        case 'S':
+            room.moveDown();
+            break;
+        case 'D':
+            room.moveRight();
+            break;
+        }
     }
     
     public void moveToRoom2(String difficulty) {
