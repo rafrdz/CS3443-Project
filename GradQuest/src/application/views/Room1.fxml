@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="500.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.Room1Controller">
+   <children>
+      <SplitPane dividerPositions="0.10040160642570281" orientation="VERTICAL" prefHeight="500.0" prefWidth="500.0">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+               <children>
+                  <Button fx:id="exitButton" layoutX="443.0" layoutY="10.0" mnemonicParsing="false" onAction="#exitGame" text="Exit" />
+                  <Label fx:id="roomLabel" layoutX="14.0" layoutY="15.0" text="Room: 1" />
+                  <Label fx:id="playerLabel" layoutX="94.0" layoutY="15.0" text="Player: Bob" />
+                  <Label fx:id="debtLabel" layoutX="196.0" layoutY="15.0" text="Debt: $" />
+                  <Label fx:id="debtValue" layoutX="242.0" layoutY="15.0" text="100000" />
+               </children></AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+               <children>
+                  <Circle fx:id="playerCircle" fill="DODGERBLUE" layoutX="50.0" layoutY="394.0" radius="50.0" stroke="BLACK" strokeType="INSIDE" />
+               </children></AnchorPane>
+        </items>
+      </SplitPane>
+   </children>
+</AnchorPane>
