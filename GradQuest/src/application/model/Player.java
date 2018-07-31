@@ -25,7 +25,7 @@ public class Player {
             }
         }
         if ("down".equals(direction)) {
-            if (curY + Player.moveSize < 444) {
+            if (curY + Player.moveSize < 394 ) {
                 ret = true;
             }
         }

@@ -24,7 +24,7 @@ import javafx.stage.Stage;
  * @author Rafael Rodriguez - mat574
  *
  */
-public class Room1Controller implements EventHandler<KeyEvent>, Initializable{
+public class Room1Controller implements Initializable{
     
     @FXML
     AnchorPane mainPane, topPane, bottomPane;
@@ -54,10 +54,6 @@ public class Room1Controller implements EventHandler<KeyEvent>, Initializable{
         playerImage.setFocusTraversable(true);
     }
     
-    @Override
-    public void handle(KeyEvent event) {
-
-    }
     
     public void handleKeyPressed(KeyEvent event) {
         String keyPressed = event.getCode().toString();
