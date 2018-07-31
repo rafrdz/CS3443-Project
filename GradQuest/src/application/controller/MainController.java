@@ -26,7 +26,7 @@ public class MainController implements EventHandler<ActionEvent> {
 
     @Override
     public void handle(ActionEvent event) {
-        Main.moveToNextView("../Intro.fxml");
+        Main.moveToNextView("../application/views/Intro.fxml");
     }
     
     public void exitGame() {

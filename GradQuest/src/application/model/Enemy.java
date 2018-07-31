@@ -1,28 +1,36 @@
 package application.model;
 
-public class Enemy extends Character{
+/**
+ * Model for the Enemy object
+ * 
+ * @author Rafael Rodriguez - mat574
+ *
+ */
+public class Enemy {
 
-    public Enemy(float x, float y) {
-        super(x, y);
-        // TODO Auto-generated constructor stub
+    private double curX;
+    private double curY;
+    public static final int moveSize = 5;
+    
+    public Enemy(double x, double y) {
+        this.curX = x;
+        this.curY = y;
     }
 
-    @Override
-    public void update() {
-        // TODO Auto-generated method stub
-        
+    public double getCurX() {
+        return curX;
     }
 
-    @Override
-    public void display() {
-        // TODO Auto-generated method stub
-        
+    public void setCurX(double curX) {
+        this.curX = curX;
     }
 
-    @Override
-    public void render() {
-        // TODO Auto-generated method stub
-        
+    public double getCurY() {
+        return curY;
+    }
+
+    public void setCurY(double curY) {
+        this.curY = curY;
     }
 
 }
