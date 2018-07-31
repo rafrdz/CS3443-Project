@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="mainPane" onKeyPressed="#handleKeyPressed" prefHeight="500.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.Room1Controller">
+<AnchorPane fx:id="mainPane" onKeyPressed="#handleKeyPressed" onKeyReleased="#handleKeyRelease" prefHeight="500.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.Room1Controller">
    <children>
       <SplitPane fx:id="splitPane" dividerPositions="0.10040160642570281" orientation="VERTICAL" prefHeight="500.0" prefWidth="500.0">
         <items>

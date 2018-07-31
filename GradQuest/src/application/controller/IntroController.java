@@ -25,7 +25,7 @@ import javafx.stage.Stage;
  * user to enter their name, and starts the game.
  * 
  * @author Rafael Rodriguez - mat574
- *
+ * @author David Brenner = iqc287
  */
 public class IntroController implements EventHandler<ActionEvent>, Initializable {
 
@@ -89,32 +89,6 @@ public class IntroController implements EventHandler<ActionEvent>, Initializable
         stage.close();
     }
 
-    /**
-     * Grid view implementation
-     */
-//    public void startGame() {
-//        if (validateUserInput(usernameInput.getText())) {
-//            currentUser = new User(usernameInput.getText());
-//        }
-//        difficulty = difficultyPicker.getValue().toString();
-//        try {
-//            FXMLLoader loader = new FXMLLoader();
-//            loader.setLocation(Main.class.getResource("../Game.fxml"));
-//            AnchorPane layout = (AnchorPane) loader.load();
-//            
-//            room = Room.loadRoomData(difficulty, 1);
-//            roomView = new RoomView(room);
-//            layout.getChildren();
-//            
-//            Scene scene = new Scene(layout);
-//            scene.setOnKeyPressed(new GameController());
-//            Main.mainStage.setScene(scene);
-//            Main.mainStage.show();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
-    
     /**
      * Non-grid view implementation
      */

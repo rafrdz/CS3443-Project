@@ -1,5 +1,8 @@
 package application.model;
 
+import application.animations.SpriteAnimation;
+import javafx.scene.image.ImageView;
+
 /**
  * Model for the Player object
  * 
@@ -11,10 +14,17 @@ public class Player {
     private double curX;
     private double curY;
     public static final int moveSize = 10;
-
-    public Player(double x, double y) {
+    
+    private ImageView imageView;
+    private String keyPressed = "";
+    
+    
+    SpriteAnimation animation;
+    
+     public Player(double x, double y) {
         this.curX = x;
         this.curY = y;
+        
     }
 
     public boolean isLegalMove(double curX, double curY, String direction) {
@@ -57,5 +67,20 @@ public class Player {
     public void setCurY(double curY) {
         this.curY = curY;
     }
+
+	public String getKeyPressed() {
+		return keyPressed;
+	}
+
+	public void setKeyPressed(String keyPressed) {
+		this.keyPressed = keyPressed;
+	}
+
+	/*public void setAnimation(ImageView playerImage) {
+		
+		this.imageView = playerImage;
+		this.imageView.setViewport(new Rectangle2D(offsetX, offsetY, width, height));
+		animation = new SpriteAnimation(playerImage, Duration.millis(200), count, columns, offsetX, offsetY, width, height);
+	}*/
 
 }
