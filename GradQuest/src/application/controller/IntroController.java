@@ -10,17 +10,12 @@ import application.model.User;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
@@ -54,7 +49,7 @@ public class IntroController implements EventHandler<ActionEvent>, Initializable
     private TextField usernameInput;
     
     @FXML
-    private ChoiceBox difficultyPicker;
+    private ChoiceBox<String> difficultyPicker;
 
     public static User currentUser;
     
@@ -95,29 +90,40 @@ public class IntroController implements EventHandler<ActionEvent>, Initializable
     }
 
     /**
-     * Sets the current user and starts the game
+     * Grid view implementation
+     */
+//    public void startGame() {
+//        if (validateUserInput(usernameInput.getText())) {
+//            currentUser = new User(usernameInput.getText());
+//        }
+//        difficulty = difficultyPicker.getValue().toString();
+//        try {
+//            FXMLLoader loader = new FXMLLoader();
+//            loader.setLocation(Main.class.getResource("../Game.fxml"));
+//            AnchorPane layout = (AnchorPane) loader.load();
+//            
+//            room = Room.loadRoomData(difficulty, 1);
+//            roomView = new RoomView(room);
+//            layout.getChildren();
+//            
+//            Scene scene = new Scene(layout);
+//            scene.setOnKeyPressed(new GameController());
+//            Main.mainStage.setScene(scene);
+//            Main.mainStage.show();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
+    
+    /**
+     * Non-grid view implementation
      */
     public void startGame() {
         if (validateUserInput(usernameInput.getText())) {
             currentUser = new User(usernameInput.getText());
         }
         difficulty = difficultyPicker.getValue().toString();
-        try {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(Main.class.getResource("../Game.fxml"));
-            AnchorPane layout = (AnchorPane) loader.load();
-            
-            room = Room.loadRoomData(difficulty, 1);
-            roomView = new RoomView(room);
-            layout.getChildren().add(roomView);
-            
-            Scene scene = new Scene(layout);
-            scene.setOnKeyPressed(new GameController());
-            Main.mainStage.setScene(scene);
-            Main.mainStage.show();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        Main.moveToNextView("../application/views/Room1.fxml");
     }
 
     /**
