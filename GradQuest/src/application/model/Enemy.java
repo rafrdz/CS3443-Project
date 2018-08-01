@@ -6,31 +6,13 @@ package application.model;
  * @author Rafael Rodriguez - mat574
  *
  */
-public class Enemy {
-
-    private double curX;
-    private double curY;
-    public static final int moveSize = 5;
+public class Enemy extends Entity{
     
     public Enemy(double x, double y) {
-        this.curX = x;
-        this.curY = y;
+        this.currentX = x;
+        this.currentY = y;
+        this.hp = 5;
+        this.moveSize = 5;
     }
-
-    public double getCurX() {
-        return curX;
-    }
-
-    public void setCurX(double curX) {
-        this.curX = curX;
-    }
-
-    public double getCurY() {
-        return curY;
-    }
-
-    public void setCurY(double curY) {
-        this.curY = curY;
-    }
-
+    
 }

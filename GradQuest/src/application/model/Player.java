@@ -1,7 +1,14 @@
 package application.model;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+
 import application.animations.SpriteAnimation;
+import javafx.geometry.Point2D;
+import javafx.geometry.Rectangle2D;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.util.Duration;
 
 /**
  * Model for the Player object
@@ -9,63 +16,74 @@ import javafx.scene.image.ImageView;
  * @author Rafael Rodriguez - mat574
  *
  */
-public class Player {
+public class Player extends Entity implements IEntity {
 
-    private double curX;
-    private double curY;
-    public static final int moveSize = 10;
-    
-    private ImageView imageView;
-    private String keyPressed = "";
-    
-    
-    SpriteAnimation animation;
-    
-     public Player(double x, double y) {
-        this.curX = x;
-        this.curY = y;
+	private String keyPressed = "";
+
+	public Player(double x, double y, ImageView imageView) {
+		this.currentX = x;
+		this.currentY = y;
+		imageView.setLayoutX(x);
+		imageView.setLayoutY(y);
+		this.hp = 10;
+		this.moveSize = 10;
+
+		this.spriteColumnsCount = 9;
+		this.spriteFrameCount = 5;
+		this.spriteHeight = 64;
+		this.spriteWidth = 64;
+
+		try {
+			imageView.setImage(new Image(new FileInputStream("images/sprite/player.png")));
+			imageView.setViewport(new Rectangle2D(0, 0, 64, 64));
+			this.imageView = imageView;
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void move() {
+		boolean validMove = this.determineMove(this.keyPressed);
+		if(validMove){
+			updateImageView(this.keyPressed);
+		}
+	}
+	
+	@Override
+	public void updateImageView(String direction) {
+        switch(direction) {
+        case "W":
+        	this.spriteAnimationStartoffsetY = 0 * this.spriteHeight;
+        	this.currentY -= this.moveSize;
+            break;
+        case "A":
+        	this.spriteAnimationStartoffsetY = 1 * this.spriteHeight;
+        	this.currentX -= this.moveSize;
+            break;
+        case "S":
+        	this.spriteAnimationStartoffsetY = 2 * this.spriteHeight;
+        	this.currentY += this.moveSize; 
+            break;
+        case "D":
+        	this.spriteAnimationStartoffsetY = 3 * this.spriteHeight;
+        	this.currentX += moveSize;
+            break;
+        }
         
-    }
-
-    public boolean isLegalMove(double curX, double curY, String direction) {
-        boolean ret = false;
-        if ("up".equals(direction)) {
-            if (curY - Player.moveSize > 0) {
-                ret = true;
-            }
-        }
-        if ("down".equals(direction)) {
-            if (curY + Player.moveSize < 394 ) {
-                ret = true;
-            }
-        }
-        if ("left".equals(direction)) {
-            if(curX - Player.moveSize > 0) {
-                ret = true;
-            }
-        }
-        if ("right".equals(direction)) {
-            if (curX + Player.moveSize < 444) {
-                ret = true;
-            }
-        }
-        return ret;
-    }
-
-    public double getCurX() {
-        return curX;
-    }
-
-    public void setCurX(double curX) {
-        this.curX = curX;
-    }
-
-    public double getCurY() {
-        return curY;
-    }
-
-    public void setCurY(double curY) {
-        this.curY = curY;
+        
+    	this.animation = new SpriteAnimation(this.imageView, 
+    			Duration.millis(500), 
+    			this.spriteFrameCount, this.spriteColumnsCount, 
+    			this.spriteAnimationStartOffsetX, this.spriteAnimationStartoffsetY,
+    			this.spriteWidth, this.spriteHeight);
+    	animation.play();
+	
+    	this.imageView.setLayoutX(this.currentX);
+    	this.imageView.setLayoutY(this.currentY);
+    	
+        System.out.println("New X: " + this.currentX + " New Y: " + this.currentY);
     }
 
 	public String getKeyPressed() {
@@ -75,12 +93,5 @@ public class Player {
 	public void setKeyPressed(String keyPressed) {
 		this.keyPressed = keyPressed;
 	}
-
-	/*public void setAnimation(ImageView playerImage) {
-		
-		this.imageView = playerImage;
-		this.imageView.setViewport(new Rectangle2D(offsetX, offsetY, width, height));
-		animation = new SpriteAnimation(playerImage, Duration.millis(200), count, columns, offsetX, offsetY, width, height);
-	}*/
 
 }
