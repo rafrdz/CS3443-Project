@@ -72,7 +72,7 @@ public class IntroController implements EventHandler<ActionEvent>, Initializable
      */
     @Override
     public void handle(ActionEvent event) {
-        Main.moveToNextView("../Main.fxml");
+        Main.moveToNextView("../application/views/Main.fxml");
     }
 
     /**

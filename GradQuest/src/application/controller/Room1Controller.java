@@ -6,6 +6,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import application.Main;
 import application.model.Enemy;
 import application.model.EnemyGroup;
 import application.model.IEntity;
@@ -42,7 +43,7 @@ public class Room1Controller implements Initializable{
     Label roomLabel, playerLabel, debtValue, debtLabel;
     
     @FXML
-    Button exitButton;
+    Button homeButton, exitButton;
     
     /*@FXML
     ImageView playerImage, enemy1Image;*/
@@ -90,6 +91,10 @@ public class Room1Controller implements Initializable{
 		}.start(); 
     }
     
+    public void returnHome() {
+        Main.moveToNextView("../application/views/Main.fxml");
+    }
+    
     
     protected void update() {
     	for(IEntity entity : entities){
@@ -119,7 +124,7 @@ public class Room1Controller implements Initializable{
     }
     
     private void getUserInfo() {
-        playerLabel.setText(IntroController.currentUser.getName());
+        playerLabel.setText("Player: " + IntroController.currentUser.getName());
     }
     
     /*private void initializeEnemies(ArrayList<Enemy> enemies) {

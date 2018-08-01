@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.control.*?>
@@ -14,10 +15,23 @@
           <AnchorPane fx:id="topPane" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
                   <Button fx:id="exitButton" layoutX="443.0" layoutY="10.0" mnemonicParsing="false" onAction="#exitGame" text="Exit" />
-                  <Label fx:id="roomLabel" layoutX="14.0" layoutY="15.0" text="Room: 1" />
-                  <Label fx:id="playerLabel" layoutX="94.0" layoutY="15.0" text="Player: Bob" />
-                  <Label fx:id="debtLabel" layoutX="196.0" layoutY="15.0" text="Debt: $" />
-                  <Label fx:id="debtValue" layoutX="242.0" layoutY="15.0" text="100000" />
+                  <Label fx:id="roomLabel" layoutX="14.0" layoutY="12.0" text="Room: 1">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Label>
+                  <Label fx:id="playerLabel" layoutX="99.0" layoutY="12.0" text="Player: Bob">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Label>
+                  <Label fx:id="debtLabel" layoutX="236.0" layoutY="12.0" text="Debt: $">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Label>
+                  <Label fx:id="debtValue" layoutX="300.0" layoutY="12.0" text="100000">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Label>
+                  <Button fx:id="homeButton" layoutX="384.0" layoutY="10.0" mnemonicParsing="false" onAction="#returnHome" text="Home" />
                </children></AnchorPane>
           <AnchorPane fx:id="bottomPane" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
