@@ -4,4 +4,5 @@ public interface IEntity {
 
 	public void move();
 	public void updateImageView(String direction);
+	public IEntity fireProjectile();
 }

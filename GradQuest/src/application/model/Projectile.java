@@ -1,20 +1,16 @@
 package application.model;
 
-/**
- * Model for the Enemy object
- * 
- * @author Rafael Rodriguez - mat574
- *
- */
-public class Enemy extends Entity implements IEntity{
-    
-    public Enemy(double x, double y) {
-        this.currentX = x;
-        this.currentY = y;
-        this.hp = 5;
-        this.moveSize = 5;
-    }
+public class Projectile extends Entity implements IEntity{
 
+	boolean isPlayers = false;
+	
+	public Projectile(int hp, boolean isPlayers, double currentX, double currentY) {
+		this.hp = hp;
+		this.isPlayers = isPlayers;
+		this.currentX = currentX;
+		this.currentY = currentY;
+	}
+	
 	@Override
 	public void move() {
 		// TODO Auto-generated method stub
@@ -34,5 +30,5 @@ public class Enemy extends Entity implements IEntity{
 		return temp;
 		
 	}
-    
+
 }

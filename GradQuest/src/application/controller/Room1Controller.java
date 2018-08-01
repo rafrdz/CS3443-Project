@@ -6,6 +6,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import application.model.Enemy;
 import application.model.EnemyGroup;
 import application.model.IEntity;
 import application.model.Player;
@@ -48,23 +49,18 @@ public class Room1Controller implements Initializable{
     
     public Player player;
     
-    public ArrayList<IEntity> enities = new ArrayList<IEntity>();
+    public ArrayList<IEntity> entities = new ArrayList<IEntity>();
     
     public EnemyGroup enemies;
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        ImageView playerImage = new ImageView();
-        player = new Player(0, 394, playerImage);
-        enities.add(player);
-    	/*Enemy enemy = new Enemy(0, 0);
-    	ImageView e = new ImageView();*/
-    	mainPane.getChildren().add(playerImage);
+        
         /*enities.add(player);
         enemies = new EnemyGroup();*/
         getUserInfo();
         //initializeEnemies(enemies.loadEnemies(IntroController.difficulty, 1));
-        playerImage.setFocusTraversable(true);
+        //playerImage.setFocusTraversable(true);
         /*try {
 			playerImage.setImage(new Image(new FileInputStream("images/sprite/player.png")));
 			playerImage.setViewport(new Rectangle2D(0, 0, 64,64));
@@ -77,10 +73,18 @@ public class Room1Controller implements Initializable{
 			int frames = 0;
 			@Override
 			public void handle(long now) {
-				// TODO Auto-generated method stub
-				if(frames % 12 == 0){
+				if(frames == 0){
+					ImageView playerImage = new ImageView();
+			        player = new Player(0, bottomPane.getHeight() - 64, playerImage,bottomPane);
+			        entities.add(player);
+			        
+			    	bottomPane.getChildren().add(playerImage);
+				}
+				
+				if(frames % 2 == 0){
 					update();
 				}
+				//update();
 				frames++;
 			}
 		}.start(); 
@@ -88,9 +92,17 @@ public class Room1Controller implements Initializable{
     
     
     protected void update() {
-    	for(IEntity entity : enities){
+    	for(IEntity entity : entities){
     		entity.move();
     	}
+    	ArrayList<IEntity> newProjectiles = new ArrayList<IEntity>(); 
+    	for(IEntity entity : entities){
+    		IEntity newEnitity = entity.fireProjectile();
+    		if(newEnitity != null){
+    			newProjectiles.add(newEnitity);
+    		}
+    	}
+    	
     }
 
     public void handleKeyRelease(KeyEvent event){
@@ -102,40 +114,9 @@ public class Room1Controller implements Initializable{
 	public void handleKeyPressed(KeyEvent event) {
         String keyPressed = event.getCode().toString();
         //System.out.println(keyPressed);
+        player.setKeyPressed("");
         player.setKeyPressed(keyPressed);
     }
-    
-    /*private void updateImageView(double newX, double newY, String keyPressed) {
-        
-    	int count = 9;
-        int columns = 9;
-        int offsetX = 0;
-        int offsetY = 0;
-        int height = 64;
-        int width = 64;
-        switch(keyPressed) {
-        case "W":
-            break;
-        case "A":
-            offsetY = 64;
-            break;
-        case "S":
-            offsetY = 128;
-            break;
-        case "D":
-            offsetY = 196;
-            break;
-        }
-        
-        
-    	SpriteAnimation animation = new SpriteAnimation(playerImage, Duration.millis(200), count, columns, offsetX, offsetY, width, height);
-    	animation.play();
-    	playerImage.setLayoutX(newX);
-        playerImage.setLayoutY(newY);
-        player.setCurX(newX);
-        player.setCurY(newY);
-        System.out.println("New X: " + newX + " New Y: " + newY);
-    }*/
     
     private void getUserInfo() {
         playerLabel.setText(IntroController.currentUser.getName());

@@ -3,6 +3,7 @@ package application.model;
 import application.animations.SpriteAnimation;
 import javafx.geometry.Point2D;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 
 public abstract class Entity {
@@ -22,6 +23,7 @@ public abstract class Entity {
     
     SpriteAnimation animation;
     ImageView imageView;
+    AnchorPane backgroundPane;
     
     public boolean isLegalMove(double curX, double curY, String direction) {
         boolean ret = false;
@@ -31,7 +33,7 @@ public abstract class Entity {
             }
         }
         if ("down".equals(direction)) {
-            if (this.currentY + this.moveSize < 394 ) {
+            if (this.currentY + this.moveSize < this.backgroundPane.getHeight() - this.spriteHeight ) {
                 ret = true;
             }
         }
@@ -41,7 +43,7 @@ public abstract class Entity {
             }
         }
         if ("right".equals(direction)) {
-            if (this.currentX + this.moveSize < 444) {
+            if (this.currentX + this.moveSize < this.backgroundPane.getWidth() - this.spriteWidth) {
                 ret = true;
             }
         }
@@ -179,5 +181,13 @@ public abstract class Entity {
 
 	public void setImageView(ImageView imageView) {
 		this.imageView = imageView;
+	}
+
+	public AnchorPane getBackgroundPane() {
+		return backgroundPane;
+	}
+
+	public void setBackgroundPane(AnchorPane backgroundPane) {
+		this.backgroundPane = backgroundPane;
 	}
 }
