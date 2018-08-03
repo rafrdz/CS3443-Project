@@ -1,13 +1,15 @@
 package application;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.stage.Stage;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 /**
  * @author Rafael Rodriguez - mat574
@@ -15,12 +17,21 @@ import javafx.scene.layout.AnchorPane;
  */
 public class Main extends Application {
     
-    public static Stage mainStage;
+    public static Image PLAYER_IMAGE = null;
+    public static Image EXPLOSION = null;
+	public static Stage mainStage;
     public static ExecutorService app;
     
     @Override
     public void start(Stage primaryStage) {
         mainStage = primaryStage;
+        try {
+			PLAYER_IMAGE = new Image(new FileInputStream("images/sprite/player.png"));
+			EXPLOSION = new Image(new FileInputStream("images/sprite/explosion01_64.png"));
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         moveToNextView("../application/views/Main.fxml");
     }
 

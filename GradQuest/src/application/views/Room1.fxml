@@ -21,17 +21,8 @@
                </children></AnchorPane>
           <AnchorPane fx:id="bottomPane" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
-                  <!-- <ImageView fx:id="playerImage" fitHeight="50.0" fitWidth="50.0" layoutY="394.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../../images/student.png" />
-                     </image>
-                  </ImageView> -->
-                  <ImageView fx:id="enemy1Image" fitHeight="50.0" fitWidth="50.0" layoutX="448.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../../images/alarmClock.png" />
-                     </image>
-                  </ImageView>
-               </children></AnchorPane>
+               </children>
+          </AnchorPane>
         </items>
       </SplitPane>
    </children>

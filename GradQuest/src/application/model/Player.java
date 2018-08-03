@@ -1,13 +1,10 @@
 package application.model;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-
+import application.Main;
 import application.animations.SpriteAnimation;
+import javafx.geometry.Point2D;
 import javafx.geometry.Rectangle2D;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 
@@ -20,6 +17,8 @@ import javafx.util.Duration;
 public class Player extends Entity implements IEntity {
 
 	private String keyPressed = "";
+	private String directionFacing = "";
+	private double projectileHp = 2;
 
 	public Player(double x, double y, ImageView imageView, AnchorPane anchorPane) {
 		this.currentX = x;
@@ -36,13 +35,10 @@ public class Player extends Entity implements IEntity {
 
 		this.backgroundPane = anchorPane;
 
-		try {
-			imageView.setImage(new Image(new FileInputStream("images/sprite/player.png")));
-			imageView.setViewport(new Rectangle2D(0, 0, 64, 64));
-			this.imageView = imageView;
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
+		imageView.setImage(Main.PLAYER_IMAGE);
+		imageView.setViewport(new Rectangle2D(0, 0, 64, 64));
+		this.imageView = imageView;
+		
 	}
 
 	@Override
@@ -56,22 +52,19 @@ public class Player extends Entity implements IEntity {
 	@Override
 	public void updateImageView(String direction) {
 		double currentSpriteOffset = this.spriteAnimationStartoffsetY;
+		this.directionFacing = direction;
 		switch (direction) {
 		case "W":
 			this.spriteAnimationStartoffsetY = 0 * this.spriteHeight;
-			//this.currentY -= this.moveSize;
 			break;
 		case "A":
 			this.spriteAnimationStartoffsetY = 1 * this.spriteHeight;
-			//this.currentX -= this.moveSize;
 			break;
 		case "S":
 			this.spriteAnimationStartoffsetY = 2 * this.spriteHeight;
-			//this.currentY += this.moveSize;
 			break;
 		case "D":
 			this.spriteAnimationStartoffsetY = 3 * this.spriteHeight;
-			//this.currentX += moveSize;
 			break;
 		}
 
@@ -90,30 +83,18 @@ public class Player extends Entity implements IEntity {
 			switch (direction) {
 			case "W":
 				this.imageView.setLayoutY(this.currentY -= 1);
-				//this.currentY -= this.moveSize;
 				break;
 			case "A":
 				this.imageView.setLayoutX(this.currentX -= 1);
-				//this.currentX -= this.moveSize;
 				break;
 			case "S":
 				this.imageView.setLayoutY(this.currentY += 1);
-				//this.currentY += this.moveSize;
 				break;
 			case "D":
 				this.imageView.setLayoutX(this.currentX += 1 );
-				//this.currentX += moveSize;
 				break;
 				
 			}
-			/*try {
-				wait(1000/60);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}*/
-			/*this.imageView.setLayoutX(this.currentX);
-			this.imageView.setLayoutY(this.currentY);*/
 		}	
 
 		System.out.println("New X: " + this.currentX + " New Y: " + this.currentY);
@@ -130,10 +111,52 @@ public class Player extends Entity implements IEntity {
 	@Override
 	public IEntity fireProjectile() {
 		IEntity temp = null;
-		if(this.keyPressed == KeyCode.SPACE.getName()){
-			
+		if(!this.keyPressed.equals("")){
+			switch (this.keyPressed) {
+			case "UP":
+				temp = new Projectile(this.projectileHp, true, this.currentX, this.currentY,new Point2D(0, 1));
+				break;
+			case "LEFT":
+				temp = new Projectile(this.projectileHp, true, this.currentX, this.currentY,new Point2D(-1, 0));
+				break;
+			case "DOWN":
+				temp = new Projectile(this.projectileHp, true, this.currentX, this.currentY,new Point2D(0, -1));
+				break;
+			case "RIGHT":
+				temp = new Projectile(this.projectileHp, true, this.currentX, this.currentY,new Point2D(1, 0));
+				break;
+				default:
+					break;
+			}
 		}
 		return temp;
 	}
 
+	@Override
+	public void setImageView(ImageView imageView) {
+		super.setImageView(imageView);
+	};
+	
+	public String getDirectionFacing() {
+		return directionFacing;
+	}
+
+	public void setDirectionFacing(String directionFacing) {
+		this.directionFacing = directionFacing;
+	}
+
+	public double getProjectileHp() {
+		return projectileHp;
+	}
+
+	public void setProjectileHp(double projectileHp) {
+		this.projectileHp = projectileHp;
+	}
+
+	@Override
+	public boolean needToRemove() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	
 }

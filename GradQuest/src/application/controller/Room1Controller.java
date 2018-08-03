@@ -1,25 +1,26 @@
 package application.controller;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import application.model.Enemy;
+import application.Main;
 import application.model.EnemyGroup;
 import application.model.IEntity;
 import application.model.Player;
+import application.model.Projectile;
 import javafx.animation.AnimationTimer;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.SplitPane;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -42,7 +43,7 @@ public class Room1Controller implements Initializable{
     Label roomLabel, playerLabel, debtValue, debtLabel;
     
     @FXML
-    Button exitButton;
+    Button homeButton, exitButton;
     
     /*@FXML
     ImageView playerImage, enemy1Image;*/
@@ -55,20 +56,7 @@ public class Room1Controller implements Initializable{
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        
-        /*enities.add(player);
-        enemies = new EnemyGroup();*/
         getUserInfo();
-        //initializeEnemies(enemies.loadEnemies(IntroController.difficulty, 1));
-        //playerImage.setFocusTraversable(true);
-        /*try {
-			playerImage.setImage(new Image(new FileInputStream("images/sprite/player.png")));
-			playerImage.setViewport(new Rectangle2D(0, 0, 64,64));
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
-        
         new AnimationTimer() {
 			int frames = 0;
 			@Override
@@ -77,61 +65,83 @@ public class Room1Controller implements Initializable{
 					ImageView playerImage = new ImageView();
 			        player = new Player(0, bottomPane.getHeight() - 64, playerImage,bottomPane);
 			        entities.add(player);
-			        
-			    	bottomPane.getChildren().add(playerImage);
+			        bottomPane.getChildren().add(playerImage);
 				}
 				
 				if(frames % 2 == 0){
 					update();
 				}
-				//update();
+				if(frames % 30 == 0){
+					fireProjectiles();
+				}
 				frames++;
 			}
 		}.start(); 
     }
     
+    public void returnHome() {
+        Main.moveToNextView("../application/views/Main.fxml");
+    }
     
-    protected void update() {
-    	for(IEntity entity : entities){
-    		entity.move();
-    	}
+    protected void fireProjectiles() {
     	ArrayList<IEntity> newProjectiles = new ArrayList<IEntity>(); 
     	for(IEntity entity : entities){
     		IEntity newEnitity = entity.fireProjectile();
     		if(newEnitity != null){
+    			ImageView imageView = new ImageView(Main.EXPLOSION);
+    			imageView.setViewport(new Rectangle2D(256, 128, 64, 64));
+    			newEnitity.setImageView(imageView);
+    			imageView.setLayoutX(player.getCurrentX());
+    			imageView.setLayoutY(player.getCurrentY());
+    			bottomPane.getChildren().add(newEnitity.getImageView());
     			newProjectiles.add(newEnitity);
     		}
     	}
-    	
+    	entities.addAll(newProjectiles);
+	}
+
+
+	protected void update() {
+    	ArrayList<Integer> removedIndexes = new ArrayList<Integer>();
+    	for(int i = 0; entities.size() > i; i++){
+    		entities.get(i).move();
+    		if(entities.get(i) instanceof Projectile && entities.get(i).needToRemove()){
+    			System.out.println("Removing");
+    			removedIndexes.add(i);
+    		}
+    	}
+    	for(Integer integer : removedIndexes){
+    		System.out.println(integer);
+    		bottomPane.getChildren().remove(entities.get(integer).getImageView());
+    		entities.remove(entities.get(integer));
+    	}
     }
 
     public void handleKeyRelease(KeyEvent event){
-    	//String keyPressed = event.getCode().toString();
-        //System.out.println(keyPressed);
-        player.setKeyPressed("");
+    	player.setKeyPressed("");
     }
     
 	public void handleKeyPressed(KeyEvent event) {
         String keyPressed = event.getCode().toString();
-        //System.out.println(keyPressed);
-        player.setKeyPressed("");
         player.setKeyPressed(keyPressed);
     }
     
     private void getUserInfo() {
-        playerLabel.setText(IntroController.currentUser.getName());
+        playerLabel.setText("Player: " + IntroController.currentUser.getName());
     }
     
-    /*private void initializeEnemies(ArrayList<Enemy> enemies) {
-        for(Enemy e : enemies) {
-            enemy1Image.setLayoutX(e.getCurX());
-            enemy1Image.setLayoutY(e.getCurY());
+    public void exitGame(Event event) {
+        if(event instanceof KeyEvent){
+        	KeyEvent keyEvent = (KeyEvent) event;
+        	if(keyEvent.getCode() == KeyCode.ESCAPE){
+        		Stage stage = (Stage) exitButton.getScene().getWindow();
+                stage.close();
+        	}
+        } else if(event instanceof MouseEvent){
+        	Stage stage = (Stage) exitButton.getScene().getWindow();
+            stage.close();
         }
-    }*/
-    
-    public void exitGame() {
-        Stage stage = (Stage) exitButton.getScene().getWindow();
-        stage.close();
+    	
     }
 
 }

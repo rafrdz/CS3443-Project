@@ -4,7 +4,6 @@ import application.animations.SpriteAnimation;
 import javafx.geometry.Point2D;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.util.Duration;
 
 public abstract class Entity {
 
@@ -24,6 +23,7 @@ public abstract class Entity {
     SpriteAnimation animation;
     ImageView imageView;
     AnchorPane backgroundPane;
+    
     
     public boolean isLegalMove(double curX, double curY, String direction) {
         boolean ret = false;

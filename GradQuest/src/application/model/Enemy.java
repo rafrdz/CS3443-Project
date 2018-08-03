@@ -34,5 +34,11 @@ public class Enemy extends Entity implements IEntity{
 		return temp;
 		
 	}
+
+	@Override
+	public boolean needToRemove() {
+		// TODO Auto-generated method stub
+		return false;
+	}
     
 }
