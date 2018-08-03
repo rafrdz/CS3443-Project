@@ -4,8 +4,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import application.Main;
-import application.model.Room;
-import application.model.RoomView;
 import application.model.User;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -54,10 +52,6 @@ public class IntroController implements EventHandler<ActionEvent>, Initializable
     public static User currentUser;
     
     public static String difficulty;
-    
-    public static Room room;
-    
-    public static RoomView roomView;
 
     /*
      * (non-Javadoc)
@@ -78,7 +72,7 @@ public class IntroController implements EventHandler<ActionEvent>, Initializable
      */
     @Override
     public void handle(ActionEvent event) {
-        Main.moveToNextView("../Main.fxml");
+        Main.moveToNextView("../application/views/Main.fxml");
     }
 
     /**
