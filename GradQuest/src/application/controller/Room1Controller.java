@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import application.Main;
+
+import application.model.Enemy;
 import application.model.EnemyGroup;
 import application.model.IEntity;
 import application.model.Player;
@@ -82,6 +84,8 @@ public class Room1Controller implements Initializable{
     public void returnHome() {
         Main.moveToNextView("../application/views/Main.fxml");
     }
+
+    
     
     protected void fireProjectiles() {
     	ArrayList<IEntity> newProjectiles = new ArrayList<IEntity>(); 
