@@ -11,4 +11,6 @@ public interface IEntity {
 	public Node getImageView();
 	public void setImageView(ImageView imageView);
 	public boolean needToRemove();
+	public boolean checkColision(IEntity entity2);
+	public boolean checkForDeath(IEntity iEntity);
 }

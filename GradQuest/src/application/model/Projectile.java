@@ -1,9 +1,7 @@
 package application.model;
 
-import application.animations.SpriteAnimation;
 import javafx.geometry.Point2D;
 import javafx.scene.image.ImageView;
-import javafx.util.Duration;
 
 public class Projectile extends Entity implements IEntity {
 
@@ -61,4 +59,31 @@ public class Projectile extends Entity implements IEntity {
 			return false;
 		}
 	}
+
+	@Override
+	public boolean checkColision(IEntity entity2) {
+		Enemy enemy = (Enemy) entity2;
+	
+		boolean isCollision = false;
+		double thisRightEdge = this.currentX + this.spriteWidth;
+		double thisBottomEdge = this.currentY + this.spriteHeight;
+		double thatRightEdge = enemy.currentX + this.spriteWidth;
+		double thatBottomEdge = enemy.currentY + this.spriteHeight;
+		
+		if(thisBottomEdge <= enemy.getCurrentY() ||
+				thisRightEdge >= enemy.getCurrentY() ||
+				thatRightEdge >= this.currentX ||
+				thatBottomEdge <= this.currentY){
+			isCollision = true;
+		}
+		return isCollision;
+	}
+
+	@Override
+	public boolean checkForDeath(IEntity iEntity) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	
 }

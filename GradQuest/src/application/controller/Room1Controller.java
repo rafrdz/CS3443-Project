@@ -167,9 +167,18 @@ public class Room1Controller implements Initializable{
     			}
     		}
     	}
-    	for(IEntity entity: projectiles){
-    		for(IEntity entity2 : enemies){
-    			//entity.checkColision(entity2);
+    	ArrayList<Integer> removeProjectileIndexs = new ArrayList<Integer>();
+    	ArrayList<Integer> removeEnemyIndexs = new ArrayList<Integer>();
+    	for(int i=0 ; projectiles.size() > i;i++){
+    		for(int j=0; enemies.size() > 0;j++){
+    			boolean wasCollison = projectiles.get(i).checkColision(enemies.get(j));
+    			if(wasCollison){
+    				removeProjectileIndexs.add(i);
+    				boolean death = enemies.get(j).checkForDeath(projectiles.get(i));
+    				if(death){
+    					removeEnemyIndexs.add(j);
+    				}
+    			}
     		}
     		
     	}

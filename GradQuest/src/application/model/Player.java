@@ -167,5 +167,21 @@ public class Player extends Entity implements IEntity {
 	public void setFireKeyPressed(String fireKeyPressed) {
 		this.fireKeyPressed = fireKeyPressed;
 	}
+
+	@Override
+	public boolean checkColision(IEntity entity2) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean checkForDeath(IEntity iEntity) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	
+
+	
 	
 }

@@ -61,5 +61,26 @@ public class Enemy extends Entity implements IEntity{
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+	@Override
+	public boolean checkColision(IEntity entity2) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean checkForDeath(IEntity iEntity) {
+		Projectile projectile = (Projectile) iEntity;
+		boolean death = false;
+		double damageDone = projectile.getHp();
+		if(this.hp - damageDone <= 0){
+			death = true;
+		} else {
+			this.hp -= damageDone;
+		}
+		return death;
+	}
+
+	
     
 }
