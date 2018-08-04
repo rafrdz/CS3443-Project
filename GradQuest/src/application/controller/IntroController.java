@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import application.Main;
+import application.model.Leaderboard;
 import application.model.User;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -52,6 +53,8 @@ public class IntroController implements EventHandler<ActionEvent>, Initializable
     public static User currentUser;
     
     public static String difficulty;
+    
+    public Leaderboard board;
 
     /*
      * (non-Javadoc)
@@ -61,6 +64,7 @@ public class IntroController implements EventHandler<ActionEvent>, Initializable
      */
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
+        board = new Leaderboard();
         errorMessage.setVisible(false);
         descriptionTextArea.setEditable(false);
         buildDifficultyOptions();
@@ -88,9 +92,16 @@ public class IntroController implements EventHandler<ActionEvent>, Initializable
      * Non-grid view implementation
      */
     public void startGame() {
+        board.loadUsers();
         if (validateUserInput(usernameInput.getText())) {
             errorMessage.setVisible(false);
-            currentUser = new User(usernameInput.getText());
+            if(board.checkForUser(usernameInput.getText())) {
+                System.out.println("User " + usernameInput.getText() + " exists!");
+            } else {
+                System.out.println("User " + usernameInput.getText() + " does not exist!");
+                board.createNewUser(new User(usernameInput.getText(), Integer.MAX_VALUE));
+            }
+            currentUser = board.getUserByName(usernameInput.getText());
         } else {
             errorMessage.setVisible(true);
             return;

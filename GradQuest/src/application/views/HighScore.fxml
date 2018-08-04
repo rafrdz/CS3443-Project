@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="500.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.HighScoreController">
+   <children>
+      <Pane prefHeight="500.0" prefWidth="500.0">
+         <children>
+            <Label fx:id="highScoresLabel" layoutX="144.0" layoutY="40.0" text="Student Debt">
+               <font>
+                  <Font name="Arial" size="36.0" />
+               </font>
+            </Label>
+            <Button fx:id="homeButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#handle" text="Home">
+               <font>
+                  <Font name="Arial" size="13.0" />
+               </font>
+            </Button>
+            <Button fx:id="exitButton" layoutX="446.0" layoutY="14.0" mnemonicParsing="false" onAction="#exitGame" text="Exit">
+               <font>
+                  <Font name="Arial" size="13.0" />
+               </font>
+            </Button>
+            <TableView fx:id="scoresTable" layoutX="50.0" layoutY="111.0" prefHeight="330.0" prefWidth="400.0">
+              <columns>
+                <TableColumn fx:id="playerColumn" prefWidth="197.0" text="Player" />
+                <TableColumn fx:id="scoreColumn" prefWidth="201.0" text="Debt (In Dollars)" />
+              </columns>
+            </TableView>
+            <Label layoutX="182.0" layoutY="89.0" text="Note: Lower is better!">
+               <font>
+                  <Font name="Arial" size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

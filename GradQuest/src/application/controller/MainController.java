@@ -22,11 +22,15 @@ public class MainController implements EventHandler<ActionEvent> {
     private Label mainTitle;
     
     @FXML
-    private Button newGame, exit;
+    private Button newGame, highScores, exit;
 
     @Override
     public void handle(ActionEvent event) {
         Main.moveToNextView("../application/views/Intro.fxml");
+    }
+    
+    public void toHighScores() {
+        Main.moveToNextView("../application/views/HighScore.fxml");
     }
     
     public void exitGame() {
