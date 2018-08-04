@@ -12,6 +12,8 @@ import application.model.IEntity;
 import application.model.Player;
 import application.model.Projectile;
 import javafx.animation.AnimationTimer;
+import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -24,6 +26,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 /**
@@ -47,6 +50,9 @@ public class Room1Controller implements Initializable{
     @FXML
     Button homeButton, exitButton;
     
+    @FXML
+    Rectangle doorShape;
+    
     /*@FXML
     ImageView playerImage, enemy1Image;*/
     
@@ -59,6 +65,7 @@ public class Room1Controller implements Initializable{
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         getUserInfo();
+        runDebtThread();
         new AnimationTimer() {
 			int frames = 0;
 			@Override
@@ -203,6 +210,32 @@ public class Room1Controller implements Initializable{
     
     private void getUserInfo() {
         playerLabel.setText("Player: " + IntroController.currentUser.getName());
+    }
+    
+    public void runDebtThread() {
+        try {
+            Thread th = new Thread(new Task() {
+                @Override
+                protected String call() throws Exception {
+                    for (int i = 1000; i <= 100000; i += 1000) {
+                        final int debt = i;
+                        Platform.runLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                debtValue.setText(String.valueOf(debt));
+                            }
+                        });
+                        Thread.sleep(1000);
+                    }
+                    return "Debt thread done!";
+                }
+            });
+            th.setDaemon(true);
+            th.start();
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
     
     public void exitGame(Event event) {

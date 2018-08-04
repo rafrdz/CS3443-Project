@@ -12,7 +12,7 @@
    <children>
       <SplitPane fx:id="splitPane" dividerPositions="0.10040160642570281" orientation="VERTICAL" prefHeight="500.0" prefWidth="500.0">
         <items>
-          <AnchorPane fx:id="topPane" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+          <AnchorPane fx:id="topPane" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" SplitPane.resizableWithParent="false">
                <children>
                   <Button fx:id="exitButton" layoutX="443.0" layoutY="10.0" mnemonicParsing="false" onKeyPressed="#exitGame" onMouseClicked="#exitGame" text="Exit" />
                   <Label fx:id="roomLabel" layoutX="14.0" layoutY="12.0" text="Room: 1">
@@ -33,8 +33,9 @@
                      </font></Label>
                   <Button fx:id="homeButton" layoutX="384.0" layoutY="10.0" mnemonicParsing="false" onAction="#returnHome" text="Home" />
                </children></AnchorPane>
-          <AnchorPane fx:id="bottomPane" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+          <AnchorPane fx:id="bottomPane" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" SplitPane.resizableWithParent="false">
                <children>
+                  <Rectangle fx:id="doorShape" arcHeight="5.0" arcWidth="5.0" fill="#834817" height="15.0" layoutX="209.0" layoutY="-7.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
                </children>
           </AnchorPane>
         </items>
