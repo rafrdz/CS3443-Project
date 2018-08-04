@@ -13,10 +13,11 @@ import javafx.stage.Stage;
 
 /**
  * @author Rafael Rodriguez - mat574
+ * @author David Brenner - iqc287
  *
  */
 public class Main extends Application {
-    
+
     public static Image PLAYER_IMAGE = null;
     public static Image EXPLOSION = null;
     public static Image ENEMY_ROOM_1 = null;
@@ -24,28 +25,42 @@ public class Main extends Application {
     public static Image ENEMY_ROOM_3 = null;
     public static Stage mainStage;
     public static ExecutorService app;
-    
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see javafx.application.Application#start(javafx.stage.Stage)
+     */
     @Override
     public void start(Stage primaryStage) {
         mainStage = primaryStage;
         try {
-			PLAYER_IMAGE = new Image(new FileInputStream("images/sprite/player.png"));
-			EXPLOSION = new Image(new FileInputStream("images/sprite/explosion01_64.png"));
-			ENEMY_ROOM_1 = new Image(new FileInputStream("images/alarmClock.png"));
-			ENEMY_ROOM_2 = new Image(new FileInputStream("images/student.png"));
-			ENEMY_ROOM_3 = new Image(new FileInputStream("images/evilFace.png"));
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+            PLAYER_IMAGE = new Image(new FileInputStream("images/sprite/player.png"));
+            EXPLOSION = new Image(new FileInputStream("images/sprite/explosion01_64.png"));
+            ENEMY_ROOM_1 = new Image(new FileInputStream("images/alarmClock.png"));
+            ENEMY_ROOM_2 = new Image(new FileInputStream("images/student.png"));
+            ENEMY_ROOM_3 = new Image(new FileInputStream("images/evilFace.png"));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
         moveToNextView("../application/views/Main.fxml");
     }
 
+    /**
+     * Main method of the application
+     * 
+     * @param args
+     */
     public static void main(String[] args) {
-        //app = Executors.newCachedThreadPool();
         launch(args);
     }
-    
+
+    /**
+     * Moves the user to the next view
+     * 
+     * @param fxmlString
+     *            - The location of the next view that the user will move to
+     */
     public static void moveToNextView(String fxmlString) {
         try {
             FXMLLoader loader = new FXMLLoader();

@@ -1,16 +1,17 @@
 package application.controller;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import application.Main;
-import application.animations.SpriteAnimation;
 import application.model.Enemy;
 import application.model.EnemyGroup;
 import application.model.IEntity;
 import application.model.Player;
 import application.model.Projectile;
+import application.model.User;
 import javafx.animation.AnimationTimer;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
@@ -36,259 +37,306 @@ import javafx.stage.Stage;
  * @author David Brenner - iqc287
  *
  */
-public class Room1Controller implements Initializable{
-    
+public class Room1Controller implements Initializable {
+
     @FXML
     AnchorPane mainPane, topPane, bottomPane;
-    
+
     @FXML
     SplitPane splitPane;
-    
+
     @FXML
     Label roomLabel, playerLabel, debtValue, debtLabel;
-    
+
     @FXML
     Button homeButton, exitButton;
-    
+
     @FXML
     Rectangle doorShape;
-    
+
     public Player player;
-    
+
     public ArrayList<IEntity> entities = new ArrayList<IEntity>();
-    
-    boolean leaveRoom= false;
-    
+
+    boolean leaveRoom = false;
+
     int roomNumber = 0;
     String difficulty = "";
-    
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see javafx.fxml.Initializable#initialize(java.net.URL,
+     * java.util.ResourceBundle)
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         getUserInfo();
         runDebtThread();
         new AnimationTimer() {
-			int frames = 0;
-			@Override
-			public void handle(long now) {
-				if(frames == 0){
-					ImageView playerImage = new ImageView();
-			        player = new Player(0, bottomPane.getHeight() - 64, playerImage,bottomPane);
-			        entities.add(player);
-			        bottomPane.getChildren().add(playerImage);
-			        roomNumber = 1;
-			        ArrayList<IEntity> arrayList = EnemyGroup.loadEnemies(IntroController.difficulty,roomNumber,bottomPane);
-			        
-			        entities.addAll(arrayList);
-				}
-				
-				if(frames % 2 == 0){
-					update();
-				}
-				if(frames % 30 == 0){
-					fireProjectiles();
-				}
-				frames++;
-			}
-		}.start(); 
+            int frames = 0;
+
+            @Override
+            public void handle(long now) {
+                if (frames == 0) {
+                    ImageView playerImage = new ImageView();
+                    player = new Player(0, bottomPane.getHeight() - 64, playerImage, bottomPane);
+                    entities.add(player);
+                    bottomPane.getChildren().add(playerImage);
+                    roomNumber = 1;
+                    ArrayList<IEntity> arrayList = EnemyGroup.loadEnemies(IntroController.difficulty, roomNumber,
+                            bottomPane);
+
+                    entities.addAll(arrayList);
+                }
+
+                if (frames % 2 == 0) {
+                    update();
+                }
+                if (frames % 30 == 0) {
+                    fireProjectiles();
+                }
+                frames++;
+            }
+        }.start();
     }
-    
+
+    /**
+     * 
+     */
     public void returnHome() {
         Main.moveToNextView("../application/views/Main.fxml");
     }
 
-    
-    
+    /**
+     * 
+     */
     protected void fireProjectiles() {
-    	ArrayList<IEntity> newProjectiles = new ArrayList<IEntity>(); 
-    	for(IEntity entity : entities){
-    		if(!(entity instanceof Player)){
-    			IEntity newEnitity = checkForNewProjectile(entity);
-    			if(newEnitity != null){
-    				newProjectiles.add(newEnitity);
-    			}
-    		}
-    	}
-    	entities.addAll(newProjectiles);
+        ArrayList<IEntity> newProjectiles = new ArrayList<IEntity>();
+        for (IEntity entity : entities) {
+            if (!(entity instanceof Player)) {
+                IEntity newEnitity = checkForNewProjectile(entity);
+                if (newEnitity != null) {
+                    newProjectiles.add(newEnitity);
+                }
+            }
+        }
+        entities.addAll(newProjectiles);
     }
 
-
-	private IEntity checkForNewProjectile(IEntity entity) {
-		IEntity newEnitity = entity.fireProjectile();
-		if(newEnitity != null){
-			ImageView imageView = new ImageView(Main.EXPLOSION);
-			imageView.setViewport(new Rectangle2D(256, 128, 64, 64));
-			newEnitity.setImageView(imageView);
-			imageView.setLayoutX(player.getCurrentX());
-			imageView.setLayoutY(player.getCurrentY());
-			bottomPane.getChildren().add(newEnitity.getImageView());
-		}
-		return newEnitity;
-	}
-
-	protected void update() {
-		ArrayList<IEntity> newProjectiles = new ArrayList<IEntity>(); 
-    	if(player.getFireKeyPressed() != ""){
-    		for(IEntity entity : entities){
-        		if(entity instanceof Player){
-        			IEntity newEnitity = checkForNewProjectile(entity);
-        			if(newEnitity != null){
-        				newProjectiles.add(newEnitity);
-        				player.setFireKeyPressed("");
-        			}
-            	}
-    		}	
-    	}
-    	entities.addAll(newProjectiles);
-    	
-		ArrayList<Integer> removedIndexes = new ArrayList<Integer>();
-    	for(int i = 0; entities.size() > i; i++){
-    		entities.get(i).move();
-    		if(entities.get(i) instanceof Player){
-    			 leaveRoom = checkLeaveRoom();
-    		}
-    		if(entities.get(i) instanceof Projectile && entities.get(i).needToRemove()){
-    			System.out.println("Removing");
-    			removedIndexes.add(i);
-    		}
-    	}
-    	for(Integer integer : removedIndexes){
-    		System.out.println(integer);
-    		bottomPane.getChildren().remove(entities.get(integer).getImageView());
-    		entities.remove(entities.get(integer));
-    	}
-    	checkForColisons();
-    	boolean enemiesLeft = false;
-    	for(IEntity entity : entities){
-    		if(entity instanceof Enemy){
-    			enemiesLeft = true;
-    		}
-    	}
-    	if(!enemiesLeft && leaveRoom){
-    		roomNumber++;
-        	if(roomNumber > 3){
-        		endGame();
-        	}
-        	roomLabel.setText("Room" + roomNumber);
-    		player.getImageView().setLayoutY(bottomPane.getHeight() - 64);
-    		player.setCurrentY(bottomPane.getHeight() - 64);
-    		ArrayList<Integer> projectilesIndexs = new ArrayList<Integer>();
-    		ArrayList<IEntity> projectiles = new ArrayList<IEntity>();
-        	for(int i = 0; entities.size() > i;i++){
-        		if((entities.get(i) instanceof Projectile)){
-        			projectiles.add(entities.get(i));
-        			projectilesIndexs.add(i);
-        		}
-        	}
-        	for(Integer integer : projectilesIndexs){
-        		bottomPane.getChildren().remove(projectiles.get(integer).getImageView());
-        		entities.remove(projectiles.get(integer));
-        	}
-        	
-    		ArrayList<IEntity> arrayList = EnemyGroup.loadEnemies(IntroController.difficulty,roomNumber,bottomPane);
-	        entities.addAll(arrayList);
-    	}
+    /**
+     * @param entity
+     * @return
+     */
+    private IEntity checkForNewProjectile(IEntity entity) {
+        IEntity newEnitity = entity.fireProjectile();
+        if (newEnitity != null) {
+            ImageView imageView = new ImageView(Main.EXPLOSION);
+            imageView.setViewport(new Rectangle2D(256, 128, 64, 64));
+            newEnitity.setImageView(imageView);
+            imageView.setLayoutX(player.getCurrentX());
+            imageView.setLayoutY(player.getCurrentY());
+            bottomPane.getChildren().add(newEnitity.getImageView());
+        }
+        return newEnitity;
     }
 
-    private void endGame() {
-		// TODO Auto-generated method stub
-		
-	}
+    /**
+     * 
+     */
+    protected void update() {
+        ArrayList<IEntity> newProjectiles = new ArrayList<IEntity>();
+        if (player.getFireKeyPressed() != "") {
+            for (IEntity entity : entities) {
+                if (entity instanceof Player) {
+                    IEntity newEnitity = checkForNewProjectile(entity);
+                    if (newEnitity != null) {
+                        newProjectiles.add(newEnitity);
+                        player.setFireKeyPressed("");
+                    }
+                }
+            }
+        }
+        entities.addAll(newProjectiles);
 
-	private boolean checkLeaveRoom() {
-    	
-    	boolean isCollision = false;
-		
-		if(player.getCurrentX() < doorShape.getLayoutX() + 80 &&
-				player.getCurrentX() + player.getSpriteWidth() > doorShape.getLayoutX() &&
-				player.getCurrentY() < doorShape.getLayoutY() + 30 &&
-				player.getSpriteHeight() + player.getCurrentY() > doorShape.getLayoutY()){
-			isCollision = true;
-		}
-		return isCollision;
-	}
+        ArrayList<Integer> removedIndexes = new ArrayList<Integer>();
+        for (int i = 0; entities.size() > i; i++) {
+            entities.get(i).move();
+            if (entities.get(i) instanceof Player) {
+                leaveRoom = checkLeaveRoom();
+            }
+            if (entities.get(i) instanceof Projectile && entities.get(i).needToRemove()) {
+                System.out.println("Removing");
+                removedIndexes.add(i);
+            }
+        }
+        for (Integer integer : removedIndexes) {
+            System.out.println(integer);
+            bottomPane.getChildren().remove(entities.get(integer).getImageView());
+            entities.remove(entities.get(integer));
+        }
+        checkForColisons();
+        boolean enemiesLeft = false;
+        for (IEntity entity : entities) {
+            if (entity instanceof Enemy) {
+                enemiesLeft = true;
+            }
+        }
+        if (!enemiesLeft && leaveRoom) {
+            roomNumber++;
+            if (roomNumber > 3) {
+                endGame();
+            }
+            roomLabel.setText("Room" + roomNumber);
+            player.getImageView().setLayoutY(bottomPane.getHeight() - 64);
+            player.setCurrentY(bottomPane.getHeight() - 64);
+            ArrayList<Integer> projectilesIndexs = new ArrayList<Integer>();
+            ArrayList<IEntity> projectiles = new ArrayList<IEntity>();
+            for (int i = 0; entities.size() > i; i++) {
+                if ((entities.get(i) instanceof Projectile)) {
+                    projectiles.add(entities.get(i));
+                    projectilesIndexs.add(i);
+                }
+            }
+            for (Integer integer : projectilesIndexs) {
+                bottomPane.getChildren().remove(projectiles.get(integer).getImageView());
+                entities.remove(projectiles.get(integer));
+            }
 
-	private void checkForColisons() {
-    	ArrayList<IEntity> projectiles = new ArrayList<IEntity>();
-    	ArrayList<IEntity> enemies = new ArrayList<IEntity>();
-    	for(IEntity entity : entities){
-    		if(!(entity instanceof Player)){
-    			if(entity instanceof Projectile){
-    				projectiles.add(entity);
-    			} else if (entity instanceof Enemy ){
-    				enemies.add(entity);
-    			}
-    		}
-    	}
-    	ArrayList<Integer> removeProjectileIndexs = new ArrayList<Integer>();
-    	ArrayList<Integer> removeEnemyIndexs = new ArrayList<Integer>();
-    	for(int i=0 ; projectiles.size() > i;i++){
-    		for(int j=0; enemies.size() > j;j++){
-    			boolean wasCollison = projectiles.get(i).checkColision(enemies.get(j));
-    			if(wasCollison){
-    				projectiles.get(i).updateImageView("w");
-    				removeProjectileIndexs.add(i);
-    				boolean death = enemies.get(j).checkForDeath(projectiles.get(i));
-    				if(death){
-    					removeEnemyIndexs.add(j);
-    				}
-    			}
-    		}
-    	}
-    	for(Integer integer: removeProjectileIndexs){
-    		System.out.println(integer);
-    		bottomPane.getChildren().remove(projectiles.get(integer).getImageView());
-    		entities.remove(projectiles.get(integer));
-    	}
-    	for(Integer integer: removeEnemyIndexs){
-    		System.out.println(integer);
-    		bottomPane.getChildren().remove(enemies.get(integer).getImageView());
-    		entities.remove(enemies.get(integer));
-    	}
-	}
-
-	public void handleKeyRelease(KeyEvent event){
-    	switch(event.getCode()){
-        case A:
-        case W:
-        case S:
-        case D:
-        	player.setKeyPressed("");
-        	break;
-        	default:
-        		break;
+            ArrayList<IEntity> arrayList = EnemyGroup.loadEnemies(IntroController.difficulty, roomNumber, bottomPane);
+            entities.addAll(arrayList);
         }
     }
-    
-	public void handleKeyPressed(KeyEvent event) {
-        String keyPressed = event.getCode().toString();
-        switch(event.getCode()){
+
+    /**
+     * 
+     */
+    private void endGame() {
+        User currentUser = IntroController.currentUser;
+        int newScore = Integer.parseInt(debtValue.getText());
+        currentUser.setHighScore(newScore);
+        try {
+            currentUser.updateStudentDebt(currentUser);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        player.setKeyPressed("");
+        Main.moveToNextView("../application/views/HighScore.fxml");
+    }
+
+    /**
+     * @return
+     */
+    private boolean checkLeaveRoom() {
+
+        boolean isCollision = false;
+
+        if (player.getCurrentX() < doorShape.getLayoutX() + 80
+                && player.getCurrentX() + player.getSpriteWidth() > doorShape.getLayoutX()
+                && player.getCurrentY() < doorShape.getLayoutY() + 30
+                && player.getSpriteHeight() + player.getCurrentY() > doorShape.getLayoutY()) {
+            isCollision = true;
+        }
+        return isCollision;
+    }
+
+    /**
+     * 
+     */
+    private void checkForColisons() {
+        ArrayList<IEntity> projectiles = new ArrayList<IEntity>();
+        ArrayList<IEntity> enemies = new ArrayList<IEntity>();
+        for (IEntity entity : entities) {
+            if (!(entity instanceof Player)) {
+                if (entity instanceof Projectile) {
+                    projectiles.add(entity);
+                } else if (entity instanceof Enemy) {
+                    enemies.add(entity);
+                }
+            }
+        }
+        ArrayList<Integer> removeProjectileIndexs = new ArrayList<Integer>();
+        ArrayList<Integer> removeEnemyIndexs = new ArrayList<Integer>();
+        for (int i = 0; projectiles.size() > i; i++) {
+            for (int j = 0; enemies.size() > j; j++) {
+                boolean wasCollison = projectiles.get(i).checkColision(enemies.get(j));
+                if (wasCollison) {
+                    projectiles.get(i).updateImageView("w");
+                    removeProjectileIndexs.add(i);
+                    boolean death = enemies.get(j).checkForDeath(projectiles.get(i));
+                    if (death) {
+                        removeEnemyIndexs.add(j);
+                    }
+                }
+            }
+        }
+        for (Integer integer : removeProjectileIndexs) {
+            System.out.println(integer);
+            bottomPane.getChildren().remove(projectiles.get(integer).getImageView());
+            entities.remove(projectiles.get(integer));
+        }
+        for (Integer integer : removeEnemyIndexs) {
+            System.out.println(integer);
+            bottomPane.getChildren().remove(enemies.get(integer).getImageView());
+            entities.remove(enemies.get(integer));
+        }
+    }
+
+    /**
+     * @param event
+     */
+    public void handleKeyRelease(KeyEvent event) {
+        switch (event.getCode()) {
         case A:
         case W:
         case S:
         case D:
-        	player.setKeyPressed(keyPressed);
-        	break;
+            player.setKeyPressed("");
+            break;
+        default:
+            break;
+        }
+    }
+
+    /**
+     * @param event
+     */
+    public void handleKeyPressed(KeyEvent event) {
+        String keyPressed = event.getCode().toString();
+        switch (event.getCode()) {
+        case A:
+        case W:
+        case S:
+        case D:
+            player.setKeyPressed(keyPressed);
+            break;
         case UP:
         case DOWN:
         case RIGHT:
         case LEFT:
-        	player.setFireKeyPressed(keyPressed);
-        	break;
-        	default:
-        		break;
+            player.setFireKeyPressed(keyPressed);
+            break;
+        default:
+            break;
         }
     }
-    
+
+    /**
+     * 
+     */
     private void getUserInfo() {
         playerLabel.setText("Player: " + IntroController.currentUser.getName());
     }
-    
+
+    /**
+     * 
+     */
     public void runDebtThread() {
         try {
             Thread th = new Thread(new Task() {
                 @Override
                 protected String call() throws Exception {
-                    for (int i = 1000; i <= 100000; i += 1000) {
+                    for (int i = 1000; i <= Integer.MAX_VALUE; i += 1000) {
                         final int debt = i;
                         Platform.runLater(new Runnable() {
                             @Override
@@ -308,19 +356,25 @@ public class Room1Controller implements Initializable{
             e.printStackTrace();
         }
     }
-    
+
+    /**
+     * Exits the game
+     * 
+     * @param event
+     *            - Keyboard input
+     */
     public void exitGame(Event event) {
-        if(event instanceof KeyEvent){
-        	KeyEvent keyEvent = (KeyEvent) event;
-        	if(keyEvent.getCode() == KeyCode.ESCAPE){
-        		Stage stage = (Stage) exitButton.getScene().getWindow();
+        if (event instanceof KeyEvent) {
+            KeyEvent keyEvent = (KeyEvent) event;
+            if (keyEvent.getCode() == KeyCode.ESCAPE) {
+                Stage stage = (Stage) exitButton.getScene().getWindow();
                 stage.close();
-        	}
-        } else if(event instanceof MouseEvent){
-        	Stage stage = (Stage) exitButton.getScene().getWindow();
+            }
+        } else if (event instanceof MouseEvent) {
+            Stage stage = (Stage) exitButton.getScene().getWindow();
             stage.close();
         }
-    	
+
     }
 
 }

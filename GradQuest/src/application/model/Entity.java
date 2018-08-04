@@ -5,26 +5,36 @@ import javafx.geometry.Point2D;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
+/**
+ * @author David Brenner - iqc287
+ * @author Rafael Rodriguez - mat574
+ *
+ */
 public abstract class Entity {
 
-	double currentX;
-	double currentY;
-	double hp;
-	double moveSize;
-	Point2D velocity;
-	
-	int spriteFrameCount;
+    double currentX;
+    double currentY;
+    double hp;
+    double moveSize;
+    Point2D velocity;
+
+    int spriteFrameCount;
     int spriteColumnsCount;
     int spriteAnimationStartOffsetX;
     int spriteAnimationStartoffsetY;
     int spriteHeight;
     int spriteWidth;
-    
+
     SpriteAnimation animation;
     ImageView imageView;
     AnchorPane backgroundPane;
-    
-    
+
+    /**
+     * @param curX
+     * @param curY
+     * @param direction
+     * @return
+     */
     public boolean isLegalMove(double curX, double curY, String direction) {
         boolean ret = false;
         if ("up".equals(direction)) {
@@ -33,12 +43,12 @@ public abstract class Entity {
             }
         }
         if ("down".equals(direction)) {
-            if (this.currentY + this.moveSize < this.backgroundPane.getHeight() - this.spriteHeight ) {
+            if (this.currentY + this.moveSize < this.backgroundPane.getHeight() - this.spriteHeight) {
                 ret = true;
             }
         }
         if ("left".equals(direction)) {
-            if(this.currentX - this.moveSize > 0) {
+            if (this.currentX - this.moveSize > 0) {
                 ret = true;
             }
         }
@@ -49,145 +59,231 @@ public abstract class Entity {
         }
         return ret;
     }
-    
-    public boolean determineMove(String direction){
-    	boolean validMove = false;
-    	switch(direction) {
+
+    /**
+     * @param direction
+     * @return
+     */
+    public boolean determineMove(String direction) {
+        boolean validMove = false;
+        switch (direction) {
         case "W":
-            if(this.isLegalMove(currentX, currentY, "up")) {
-            	validMove = true;
+            if (this.isLegalMove(currentX, currentY, "up")) {
+                validMove = true;
             }
             break;
         case "A":
-            if(this.isLegalMove(currentX, currentY, "left")) {
-            	validMove = true;
-        	}
+            if (this.isLegalMove(currentX, currentY, "left")) {
+                validMove = true;
+            }
             break;
         case "S":
-            if(this.isLegalMove(currentX, currentY, "down")) {
-            	validMove = true;
-        	}
+            if (this.isLegalMove(currentX, currentY, "down")) {
+                validMove = true;
+            }
             break;
         case "D":
-            if(this.isLegalMove(currentX, currentY, "right")) {
-            	validMove = true;
+            if (this.isLegalMove(currentX, currentY, "right")) {
+                validMove = true;
             }
             break;
         }
-    	return validMove;
+        return validMove;
     }
-    
 
-    
-	public Point2D getVelocity() {
-		return velocity;
-	}
+    /**
+     * @return
+     */
+    public Point2D getVelocity() {
+        return velocity;
+    }
 
-	public void setVelocity(Point2D velocity) {
-		this.velocity = velocity;
-	}
+    /**
+     * @param velocity
+     */
+    public void setVelocity(Point2D velocity) {
+        this.velocity = velocity;
+    }
 
-	public SpriteAnimation getAnimation() {
-		return animation;
-	}
+    /**
+     * @return
+     */
+    public SpriteAnimation getAnimation() {
+        return animation;
+    }
 
-	public void setAnimation(SpriteAnimation animation) {
-		this.animation = animation;
-	}
+    /**
+     * @param animation
+     */
+    public void setAnimation(SpriteAnimation animation) {
+        this.animation = animation;
+    }
 
-	public double getMoveSize() {
-		return moveSize;
-	}
+    /**
+     * @return
+     */
+    public double getMoveSize() {
+        return moveSize;
+    }
 
-	public void setMoveSize(double moveSize) {
-		this.moveSize = moveSize;
-	}
+    /**
+     * @param moveSize
+     */
+    public void setMoveSize(double moveSize) {
+        this.moveSize = moveSize;
+    }
 
-	public void setCurrentX(double currentX) {
-		this.currentX = currentX;
-	}
+    /**
+     * @param currentX
+     */
+    public void setCurrentX(double currentX) {
+        this.currentX = currentX;
+    }
 
-	public void setCurrentY(double currentY) {
-		this.currentY = currentY;
-	}
+    /**
+     * @param currentY
+     */
+    public void setCurrentY(double currentY) {
+        this.currentY = currentY;
+    }
 
-	public void setHp(double hp) {
-		this.hp = hp;
-	}
+    /**
+     * @param hp
+     */
+    public void setHp(double hp) {
+        this.hp = hp;
+    }
 
-	public double getCurrentX() {
-		return currentX;
-	}
+    /**
+     * @return
+     */
+    public double getCurrentX() {
+        return currentX;
+    }
 
-	public double getCurrentY() {
-		return currentY;
-	}
+    /**
+     * @return
+     */
+    public double getCurrentY() {
+        return currentY;
+    }
 
-	public double getHp() {
-		return hp;
-	}
+    /**
+     * @return
+     */
+    public double getHp() {
+        return hp;
+    }
 
-	public int getSpriteFrameCount() {
-		return spriteFrameCount;
-	}
+    /**
+     * @return
+     */
+    public int getSpriteFrameCount() {
+        return spriteFrameCount;
+    }
 
-	public void setSpriteFrameCount(int spriteFrameCount) {
-		this.spriteFrameCount = spriteFrameCount;
-	}
+    /**
+     * @param spriteFrameCount
+     */
+    public void setSpriteFrameCount(int spriteFrameCount) {
+        this.spriteFrameCount = spriteFrameCount;
+    }
 
-	public int getSpriteColumnsCount() {
-		return spriteColumnsCount;
-	}
+    /**
+     * @return
+     */
+    public int getSpriteColumnsCount() {
+        return spriteColumnsCount;
+    }
 
-	public void setSpriteColumnsCount(int spriteColumnsCount) {
-		this.spriteColumnsCount = spriteColumnsCount;
-	}
+    /**
+     * @param spriteColumnsCount
+     */
+    public void setSpriteColumnsCount(int spriteColumnsCount) {
+        this.spriteColumnsCount = spriteColumnsCount;
+    }
 
-	public int getSpriteAnimationStartOffsetX() {
-		return spriteAnimationStartOffsetX;
-	}
+    /**
+     * @return
+     */
+    public int getSpriteAnimationStartOffsetX() {
+        return spriteAnimationStartOffsetX;
+    }
 
-	public void setSpriteAnimationStartOffsetX(int spriteAnimationStartOffsetX) {
-		this.spriteAnimationStartOffsetX = spriteAnimationStartOffsetX;
-	}
+    /**
+     * @param spriteAnimationStartOffsetX
+     */
+    public void setSpriteAnimationStartOffsetX(int spriteAnimationStartOffsetX) {
+        this.spriteAnimationStartOffsetX = spriteAnimationStartOffsetX;
+    }
 
-	public int getSpriteAnimationStartoffsetY() {
-		return spriteAnimationStartoffsetY;
-	}
+    /**
+     * @return
+     */
+    public int getSpriteAnimationStartoffsetY() {
+        return spriteAnimationStartoffsetY;
+    }
 
-	public void setSpriteAnimationStartoffsetY(int spriteAnimationStartoffsetY) {
-		this.spriteAnimationStartoffsetY = spriteAnimationStartoffsetY;
-	}
+    /**
+     * @param spriteAnimationStartoffsetY
+     */
+    public void setSpriteAnimationStartoffsetY(int spriteAnimationStartoffsetY) {
+        this.spriteAnimationStartoffsetY = spriteAnimationStartoffsetY;
+    }
 
-	public int getSpriteHeight() {
-		return spriteHeight;
-	}
+    /**
+     * @return
+     */
+    public int getSpriteHeight() {
+        return spriteHeight;
+    }
 
-	public void setSpriteHeight(int spriteHeight) {
-		this.spriteHeight = spriteHeight;
-	}
+    /**
+     * @param spriteHeight
+     */
+    public void setSpriteHeight(int spriteHeight) {
+        this.spriteHeight = spriteHeight;
+    }
 
-	public int getSpriteWidth() {
-		return spriteWidth;
-	}
+    /**
+     * @return
+     */
+    public int getSpriteWidth() {
+        return spriteWidth;
+    }
 
-	public void setSpriteWidth(int spriteWidth) {
-		this.spriteWidth = spriteWidth;
-	}
+    /**
+     * @param spriteWidth
+     */
+    public void setSpriteWidth(int spriteWidth) {
+        this.spriteWidth = spriteWidth;
+    }
 
-	public ImageView getImageView() {
-		return imageView;
-	}
+    /**
+     * @return
+     */
+    public ImageView getImageView() {
+        return imageView;
+    }
 
-	public void setImageView(ImageView imageView) {
-		this.imageView = imageView;
-	}
+    /**
+     * @param imageView
+     */
+    public void setImageView(ImageView imageView) {
+        this.imageView = imageView;
+    }
 
-	public AnchorPane getBackgroundPane() {
-		return backgroundPane;
-	}
+    /**
+     * @return
+     */
+    public AnchorPane getBackgroundPane() {
+        return backgroundPane;
+    }
 
-	public void setBackgroundPane(AnchorPane backgroundPane) {
-		this.backgroundPane = backgroundPane;
-	}
+    /**
+     * @param backgroundPane
+     */
+    public void setBackgroundPane(AnchorPane backgroundPane) {
+        this.backgroundPane = backgroundPane;
+    }
 }

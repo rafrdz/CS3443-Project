@@ -19,20 +19,26 @@ import java.util.Scanner;
  *
  */
 public class Leaderboard {
-    
+
     private List<User> users;
-    
+
+    /**
+     * 
+     */
     public Leaderboard() {
         this.users = new ArrayList<User>();
     }
-    
+
+    /**
+     * 
+     */
     public void loadUsers() {
         List<User> users = new ArrayList<User>();
         Scanner scan = null;
         try {
             scan = new Scanner(new File("./highScores.csv"));
-            
-            while(scan.hasNextLine()) {
+
+            while (scan.hasNextLine()) {
                 String userData = scan.nextLine();
                 String[] tokens = userData.split(",");
                 users.add(new User(tokens[0], Integer.parseInt(tokens[1])));
@@ -47,27 +53,38 @@ public class Leaderboard {
         Collections.sort(users, User.UserComparator);
         this.getUsers().addAll(users);
     }
-    
+
+    /**
+     * @param name
+     * @return
+     */
     public boolean checkForUser(String name) {
         boolean exists = false;
-        for(User tempUser : this.getUsers()) {
-            if(name.equals(tempUser.getName())) {
+        for (User tempUser : this.getUsers()) {
+            if (name.equals(tempUser.getName())) {
                 exists = true;
             }
         }
         return exists;
     }
-    
+
+    /**
+     * @param name
+     * @return
+     */
     public User getUserByName(String name) {
         User temp = null;
-        for(User current : this.getUsers()) {
-            if(name.equals(current.getName())) {
+        for (User current : this.getUsers()) {
+            if (name.equals(current.getName())) {
                 temp = current;
             }
         }
         return temp;
     }
-    
+
+    /**
+     * @param user
+     */
     public void createNewUser(User user) {
         BufferedWriter bufferedWriter = null;
         FileWriter fileWriter = null;
@@ -100,28 +117,17 @@ public class Leaderboard {
         }
         this.getUsers().add(user);
     }
-    
-    public void updateStudentDebt(User user) throws IOException {
-        Path path = Paths.get("./highScores.csv");
-        List<String> fileContent = new ArrayList<>(Files.readAllLines(path, StandardCharsets.UTF_8));
 
-        for (int i = 0; i < fileContent.size(); i++) {
-            String currentLine = fileContent.get(i);
-            String[] tokens = currentLine.split(",");
-            String userName = tokens[0];
-            if(userName.equals(user.getName())) {
-                String newLine = userName + "," + user.getHighScore();
-                fileContent.set(i, newLine);
-                break;
-            }
-        }
-        Files.write(path, fileContent, StandardCharsets.UTF_8);
-    }
-
+    /**
+     * @return
+     */
     public List<User> getUsers() {
         return users;
     }
 
+    /**
+     * @param users
+     */
     public void setUsers(List<User> users) {
         this.users = users;
     }

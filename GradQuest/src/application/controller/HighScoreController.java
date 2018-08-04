@@ -17,25 +17,35 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
-public class HighScoreController implements EventHandler<ActionEvent>, Initializable{
+/**
+ * @author Rafael Rodriguez - mat574
+ *
+ */
+public class HighScoreController implements EventHandler<ActionEvent>, Initializable {
 
     @FXML
     Label highScoresLabel;
-    
+
     @FXML
     Button homeButton, exitButton;
-    
+
     @FXML
     TableView<User> scoresTable;
-    
+
     @FXML
     TableColumn<User, String> playerColumn;
-    
+
     @FXML
     TableColumn<User, Integer> scoreColumn;
-    
+
     public Leaderboard board;
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see javafx.fxml.Initializable#initialize(java.net.URL,
+     * java.util.ResourceBundle)
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         board = new Leaderboard();
@@ -43,16 +53,27 @@ public class HighScoreController implements EventHandler<ActionEvent>, Initializ
         buildScoreboard();
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see javafx.event.EventHandler#handle(javafx.event.Event)
+     */
     @Override
     public void handle(ActionEvent event) {
         Main.moveToNextView("../application/views/Main.fxml");
     }
-    
+
+    /**
+     * Exits the game
+     */
     public void exitGame() {
         Stage stage = (Stage) exitButton.getScene().getWindow();
         stage.close();
     }
-    
+
+    /**
+     * Pulls user data from the highScores.csv file and builds the table
+     */
     private void buildScoreboard() {
         playerColumn.setCellValueFactory(new PropertyValueFactory<User, String>("name"));
         scoreColumn.setCellValueFactory(new PropertyValueFactory<User, Integer>("highScore"));

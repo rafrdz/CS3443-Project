@@ -24,7 +24,7 @@ import javafx.stage.Stage;
  * user to enter their name, and starts the game.
  * 
  * @author Rafael Rodriguez - mat574
- * @author David Brenner = iqc287
+ * @author David Brenner - iqc287
  */
 public class IntroController implements EventHandler<ActionEvent>, Initializable {
 
@@ -46,14 +46,14 @@ public class IntroController implements EventHandler<ActionEvent>, Initializable
 
     @FXML
     private TextField usernameInput;
-    
+
     @FXML
     private ChoiceBox<String> difficultyPicker;
 
     public static User currentUser;
-    
+
     public static String difficulty;
-    
+
     public Leaderboard board;
 
     /*
@@ -89,13 +89,13 @@ public class IntroController implements EventHandler<ActionEvent>, Initializable
     }
 
     /**
-     * Non-grid view implementation
+     * Validates user input, creates a new user (if needed) and starts the game
      */
     public void startGame() {
         board.loadUsers();
         if (validateUserInput(usernameInput.getText())) {
             errorMessage.setVisible(false);
-            if(board.checkForUser(usernameInput.getText())) {
+            if (board.checkForUser(usernameInput.getText())) {
                 System.out.println("User " + usernameInput.getText() + " exists!");
             } else {
                 System.out.println("User " + usernameInput.getText() + " does not exist!");
@@ -123,7 +123,10 @@ public class IntroController implements EventHandler<ActionEvent>, Initializable
         }
         return false;
     }
-    
+
+    /**
+     * Builds the user difficulty VVL list
+     */
     private void buildDifficultyOptions() {
         difficultyPicker.getItems().removeAll(difficultyPicker.getItems());
         difficultyPicker.getItems().addAll("Easy", "Medium", "Hard");
