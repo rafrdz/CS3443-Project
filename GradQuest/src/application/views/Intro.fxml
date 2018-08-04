@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
@@ -11,7 +12,7 @@
    <children>
       <Pane fx:id="introPane" prefHeight="500.0" prefWidth="500.0">
          <children>
-            <TextArea fx:id="descriptionTextArea" editable="false" layoutX="26.0" layoutY="56.0" prefHeight="165.0" prefWidth="450.0" text="Welcome to Grad Quest!&#10;You are an amibitous student who sets out to pursue a degree in your chosen field. Along the way, you will have to avoid a treacherous terrain consisting of high interest loans, professors with low scores on RateMyProf, and 8 AM classes. Will you be able to survive with a job as a barista, $15 in your checking account, and a pack of Top Ramen, or will you meet your demise at the hands of Sallie Mae?&#10;" wrapText="true">
+            <TextArea fx:id="descriptionTextArea" editable="false" layoutX="26.0" layoutY="56.0" prefHeight="165.0" prefWidth="450.0" text="Welcome to Grad Quest!&#10;You are an amibitous student who sets out to pursue a degree in your chosen field. Along the way, you will have to avoid a treacherous terrain consisting of high interest loans, professors with low scores on RateMyProf, and 8 AM classes. Will you be able to survive with a job as a barista, $15 in your checking account, and a pack of Top Ramen, or will you meet your demise at the hands of Mallie Sae?&#10;" wrapText="true">
                <font>
                   <Font name="Arial" size="14.0" />
                </font></TextArea>
@@ -27,57 +28,51 @@
                   <Font name="Arial" size="24.0" />
                </font>
             </Label>
-            <Rectangle fx:id="wShape" arcHeight="5.0" arcWidth="5.0" fill="#bbbbbb" height="40.0" layoutX="142.0" layoutY="283.0" stroke="BLACK" strokeType="INSIDE" width="40.0" />
-            <Rectangle fx:id="sShape" arcHeight="5.0" arcWidth="5.0" fill="#bbbbbb" height="40.0" layoutX="94.0" layoutY="328.0" stroke="BLACK" strokeType="INSIDE" width="40.0" />
-            <Rectangle fx:id="dShape" arcHeight="5.0" arcWidth="5.0" fill="#bbbbbb" height="40.0" layoutX="189.0" layoutY="328.0" stroke="BLACK" strokeType="INSIDE" width="40.0" />
-            <Rectangle fx:id="aShape" arcHeight="5.0" arcWidth="5.0" fill="#bbbbbb" height="40.0" layoutX="142.0" layoutY="328.0" stroke="BLACK" strokeType="INSIDE" width="40.0" />
-            <Rectangle fx:id="spaceShape" arcHeight="5.0" arcWidth="5.0" fill="#bbbbbb" height="40.0" layoutX="252.0" layoutY="328.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
-            <Label fx:id="wText" layoutX="155.0" layoutY="294.0" text="W">
+            <Rectangle fx:id="wShape" arcHeight="5.0" arcWidth="5.0" fill="#bbbbbb" height="40.0" layoutX="121.0" layoutY="282.0" stroke="BLACK" strokeType="INSIDE" width="40.0" />
+            <Rectangle fx:id="sShape" arcHeight="5.0" arcWidth="5.0" fill="#bbbbbb" height="40.0" layoutX="73.0" layoutY="327.0" stroke="BLACK" strokeType="INSIDE" width="40.0" />
+            <Rectangle fx:id="dShape" arcHeight="5.0" arcWidth="5.0" fill="#bbbbbb" height="40.0" layoutX="168.0" layoutY="327.0" stroke="BLACK" strokeType="INSIDE" width="40.0" />
+            <Rectangle fx:id="aShape" arcHeight="5.0" arcWidth="5.0" fill="#bbbbbb" height="40.0" layoutX="121.0" layoutY="327.0" stroke="BLACK" strokeType="INSIDE" width="40.0" />
+            <Label fx:id="wText" layoutX="134.0" layoutY="293.0" text="W">
                <font>
                   <Font name="Arial" size="14.0" />
                </font>
             </Label>
-            <Label fx:id="aText" layoutX="109.0" layoutY="339.0" text="A">
+            <Label fx:id="aText" layoutX="88.0" layoutY="338.0" text="A">
                <font>
                   <Font name="Arial" size="14.0" />
                </font>
             </Label>
-            <Label fx:id="sText" layoutX="158.0" layoutY="339.0" text="S">
+            <Label fx:id="sText" layoutX="137.0" layoutY="338.0" text="S">
                <font>
                   <Font name="Arial" size="14.0" />
                </font>
             </Label>
-            <Label fx:id="dText" layoutX="204.0" layoutY="339.0" text="D">
+            <Label fx:id="dText" layoutX="183.0" layoutY="338.0" text="D">
                <font>
                   <Font name="Arial" size="14.0" />
                </font>
             </Label>
-            <Label fx:id="spaceText" layoutX="331.0" layoutY="339.0" text="Space">
+            <Label fx:id="aLabel" layoutX="26.0" layoutY="302.0" text="A: Move Left">
                <font>
                   <Font name="Arial" size="14.0" />
                </font>
             </Label>
-            <Label fx:id="aLabel" layoutX="47.0" layoutY="303.0" text="A: Move Left">
+            <Label fx:id="sLabel" layoutX="93.0" layoutY="367.0" text="S: Move Down">
                <font>
                   <Font name="Arial" size="14.0" />
                </font>
             </Label>
-            <Label fx:id="sLabel" layoutX="114.0" layoutY="368.0" text="S: Move Down">
+            <Label fx:id="dLabel" layoutX="168.0" layoutY="302.0" text="D: Move Right">
                <font>
                   <Font name="Arial" size="14.0" />
                </font>
             </Label>
-            <Label fx:id="dLabel" layoutX="189.0" layoutY="303.0" text="D: Move Right">
+            <Label fx:id="spaceLabel" layoutX="263.0" layoutY="266.0" text="Arrow Key: Fire (Current Direction)">
                <font>
                   <Font name="Arial" size="14.0" />
                </font>
             </Label>
-            <Label fx:id="spaceLabel" layoutX="308.0" layoutY="303.0" text="Space: Fire">
-               <font>
-                  <Font name="Arial" size="14.0" />
-               </font>
-            </Label>
-            <Label fx:id="wLabel" layoutX="118.0" layoutY="266.0" text="W: Move Up">
+            <Label fx:id="wLabel" layoutX="103.0" layoutY="266.0" text="W: Move Up">
                <font>
                   <Font name="Arial" size="14.0" />
                </font>
@@ -91,6 +86,31 @@
             <TextField fx:id="usernameInput" layoutX="72.0" layoutY="420.0" />
             <Label fx:id="difficultyLabel" layoutX="341.0" layoutY="403.0" text="Difficulty:" />
             <ChoiceBox fx:id="difficultyPicker" layoutX="296.0" layoutY="420.0" prefWidth="150.0" />
+            <Rectangle fx:id="downShape" arcHeight="5.0" arcWidth="5.0" fill="#bbbbbb" height="40.0" layoutX="353.0" layoutY="327.0" stroke="BLACK" strokeType="INSIDE" width="40.0" />
+            <Rectangle fx:id="leftShape" arcHeight="5.0" arcWidth="5.0" fill="#bbbbbb" height="40.0" layoutX="306.0" layoutY="327.0" stroke="BLACK" strokeType="INSIDE" width="40.0" />
+            <Rectangle fx:id="rightShape" arcHeight="5.0" arcWidth="5.0" fill="#bbbbbb" height="40.0" layoutX="400.0" layoutY="327.0" stroke="BLACK" strokeType="INSIDE" width="40.0" />
+            <Rectangle fx:id="upShape" arcHeight="5.0" arcWidth="5.0" fill="#bbbbbb" height="40.0" layoutX="353.0" layoutY="282.0" stroke="BLACK" strokeType="INSIDE" width="40.0" />
+            <Label fx:id="upLabel" layoutX="364.0" layoutY="294.0" text="Up">
+               <font>
+                  <Font name="Arial" size="13.0" />
+               </font>
+            </Label>
+            <Label fx:id="downLabel" layoutX="356.0" layoutY="339.0" text="Down">
+               <font>
+                  <Font name="Arial" size="13.0" />
+               </font>
+            </Label>
+            <Label fx:id="leftLabel" layoutX="315.0" layoutY="339.0" text="Left">
+               <font>
+                  <Font name="Arial" size="13.0" />
+               </font>
+            </Label>
+            <Label fx:id="rightLabel" layoutX="405.0" layoutY="338.0" text="Right">
+               <font>
+                  <Font name="Arial" size="13.0" />
+               </font>
+            </Label>
+            <Label fx:id="errorMessage" layoutX="49.0" layoutY="388.0" text="Error: Username cannot be empty!" textFill="RED" />
          </children>
       </Pane>
    </children>
