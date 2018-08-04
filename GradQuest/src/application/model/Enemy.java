@@ -105,7 +105,7 @@ public class Enemy extends Entity implements IEntity {
      * @see application.model.IEntity#checkColision(application.model.IEntity)
      */
     @Override
-    public boolean checkColision(IEntity entity2) {
+    public boolean checkCollision(IEntity entity2) {
         // TODO Auto-generated method stub
         return false;
     }

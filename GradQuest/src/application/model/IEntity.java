@@ -43,7 +43,7 @@ public interface IEntity {
      * @param entity2
      * @return
      */
-    public boolean checkColision(IEntity entity2);
+    public boolean checkCollision(IEntity entity2);
 
     /**
      * @param iEntity

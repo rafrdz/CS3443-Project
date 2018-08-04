@@ -108,7 +108,7 @@ public class Projectile extends Entity implements IEntity {
      * @see application.model.IEntity#checkColision(application.model.IEntity)
      */
     @Override
-    public boolean checkColision(IEntity entity2) {
+    public boolean checkCollision(IEntity entity2) {
         Enemy that = (Enemy) entity2;
 
         boolean isCollision = false;

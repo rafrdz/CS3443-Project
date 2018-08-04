@@ -64,7 +64,7 @@ public class HighScoreController implements EventHandler<ActionEvent>, Initializ
     }
 
     /**
-     * Exits the game
+     * Exits the application
      */
     public void exitGame() {
         Stage stage = (Stage) exitButton.getScene().getWindow();

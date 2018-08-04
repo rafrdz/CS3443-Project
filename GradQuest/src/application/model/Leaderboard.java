@@ -5,16 +5,14 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
 /**
+ * Leaderboard object for holding, updating, creating, and checking for Users
+ * 
  * @author Rafael Rodriguez - mat574
  *
  */
@@ -23,14 +21,15 @@ public class Leaderboard {
     private List<User> users;
 
     /**
-     * 
+     * Constructor for the Leaderboard object
      */
     public Leaderboard() {
         this.users = new ArrayList<User>();
     }
 
     /**
-     * 
+     * Loads all users from the highScores.csv file and sorts them in ascending
+     * order by score
      */
     public void loadUsers() {
         List<User> users = new ArrayList<User>();
@@ -55,8 +54,11 @@ public class Leaderboard {
     }
 
     /**
+     * Checks the current user list to see if a name exists in that list
+     * 
      * @param name
-     * @return
+     *            - The name to be checked
+     * @return - Whether or not the given name exists in the list
      */
     public boolean checkForUser(String name) {
         boolean exists = false;
@@ -69,8 +71,11 @@ public class Leaderboard {
     }
 
     /**
+     * Gets a User object from the list of all current users
+     * 
      * @param name
-     * @return
+     *            - The name of the desired User object
+     * @return - A User object of the given name
      */
     public User getUserByName(String name) {
         User temp = null;
@@ -83,7 +88,11 @@ public class Leaderboard {
     }
 
     /**
+     * Creates a new User object, writes the User object to the file, and adds the
+     * new User to the list of current users
+     * 
      * @param user
+     *            - The new User object to be added
      */
     public void createNewUser(User user) {
         BufferedWriter bufferedWriter = null;
@@ -119,7 +128,7 @@ public class Leaderboard {
     }
 
     /**
-     * @return
+     * @return - List of current users
      */
     public List<User> getUsers() {
         return users;
@@ -127,6 +136,7 @@ public class Leaderboard {
 
     /**
      * @param users
+     *            - List of users to be set
      */
     public void setUsers(List<User> users) {
         this.users = users;

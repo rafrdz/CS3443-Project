@@ -62,6 +62,9 @@ public class Player extends Entity implements IEntity {
         }
     }
 
+    /* (non-Javadoc)
+     * @see application.model.IEntity#updateImageView(java.lang.String)
+     */
     @Override
     public void updateImageView(String direction) {
         double currentSpriteOffset = this.spriteAnimationStartoffsetY;
@@ -225,7 +228,7 @@ public class Player extends Entity implements IEntity {
      * @see application.model.IEntity#checkColision(application.model.IEntity)
      */
     @Override
-    public boolean checkColision(IEntity entity2) {
+    public boolean checkCollision(IEntity entity2) {
         // TODO Auto-generated method stub
         return false;
     }

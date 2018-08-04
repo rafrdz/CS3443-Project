@@ -59,7 +59,7 @@ public class Room1Controller implements Initializable {
     public ArrayList<IEntity> entities = new ArrayList<IEntity>();
 
     boolean leaveRoom = false;
-    
+
     boolean gameOver = false;
 
     int roomNumber = 0;
@@ -92,7 +92,7 @@ public class Room1Controller implements Initializable {
                     entities.addAll(arrayList);
                 }
                 if (frames % 2 == 0) {
-                    if(!gameOver) {
+                    if (!gameOver) {
                         update();
                     } else {
                         this.stop();
@@ -107,14 +107,14 @@ public class Room1Controller implements Initializable {
     }
 
     /**
-     * 
+     * Returns the user to the starting view
      */
     public void returnHome() {
         Main.moveToNextView("../application/views/Main.fxml");
     }
 
     /**
-     * 
+     * Fires projectiles from the player character
      */
     protected void fireProjectiles() {
         ArrayList<IEntity> newProjectiles = new ArrayList<IEntity>();
@@ -147,7 +147,7 @@ public class Room1Controller implements Initializable {
     }
 
     /**
-     * 
+     * Updates all of the entities on the current view
      */
     protected void update() {
         ArrayList<IEntity> newProjectiles = new ArrayList<IEntity>();
@@ -215,14 +215,15 @@ public class Room1Controller implements Initializable {
     }
 
     /**
-     * 
+     * Calculates the final score of the player, updates the final score, ends the
+     * game, and sends the user to the HighScore view
      */
     private void endGame() {
         User currentUser = IntroController.currentUser;
         String difficulty = IntroController.difficulty;
         int newScore = Integer.parseInt(debtValue.getText());
-        
-        if("Easy".equals(difficulty)) {
+
+        if ("Easy".equals(difficulty)) {
             newScore = newScore * 3;
         } else if ("Medium".equals(difficulty)) {
             newScore = newScore * 2;
@@ -241,10 +242,11 @@ public class Room1Controller implements Initializable {
     }
 
     /**
-     * @return
+     * Determines if the player has "left" the current room
+     * 
+     * @return - Whether or not the player has left the room
      */
     private boolean checkLeaveRoom() {
-
         boolean isCollision = false;
 
         if (player.getCurrentX() < doorShape.getLayoutX() + 80
@@ -257,7 +259,8 @@ public class Room1Controller implements Initializable {
     }
 
     /**
-     * 
+     * Checks each entity in the view for a collision and responds with the
+     * appropriate action
      */
     private void checkForCollisions() {
         ArrayList<IEntity> projectiles = new ArrayList<IEntity>();
@@ -275,7 +278,7 @@ public class Room1Controller implements Initializable {
         ArrayList<Integer> removeEnemyIndexs = new ArrayList<Integer>();
         for (int i = 0; projectiles.size() > i; i++) {
             for (int j = 0; enemies.size() > j; j++) {
-                boolean wasCollison = projectiles.get(i).checkColision(enemies.get(j));
+                boolean wasCollison = projectiles.get(i).checkCollision(enemies.get(j));
                 if (wasCollison) {
                     projectiles.get(i).updateImageView("w");
                     removeProjectileIndexs.add(i);
@@ -299,7 +302,10 @@ public class Room1Controller implements Initializable {
     }
 
     /**
+     * Determines an action based on user key release
+     * 
      * @param event
+     *            - The input from the user
      */
     public void handleKeyRelease(KeyEvent event) {
         switch (event.getCode()) {
@@ -315,7 +321,10 @@ public class Room1Controller implements Initializable {
     }
 
     /**
+     * Determines an action based on user key press
+     * 
      * @param event
+     *            - The input from the user
      */
     public void handleKeyPressed(KeyEvent event) {
         String keyPressed = event.getCode().toString();
@@ -338,18 +347,21 @@ public class Room1Controller implements Initializable {
     }
 
     /**
-     * 
+     * Sets the user name in the information section of the game view
      */
     private void setUserInfo() {
         playerLabel.setText("Player: " + IntroController.currentUser.getName());
     }
-    
+
+    /**
+     * Sets the difficulty level in the information section of the game view
+     */
     private void setDifficultyLabel() {
         difficultyLabel.setText("-" + IntroController.difficulty);
     }
 
     /**
-     * 
+     * Starts and runs the debt counter in the information section of the game view
      */
     public void runDebtThread() {
         try {
@@ -394,7 +406,6 @@ public class Room1Controller implements Initializable {
             Stage stage = (Stage) exitButton.getScene().getWindow();
             stage.close();
         }
-
     }
 
 }

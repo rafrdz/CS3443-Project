@@ -10,7 +10,7 @@ import java.util.Comparator;
 import java.util.List;
 
 /**
- * Model for the user object
+ * User object model for storing user data, sorting users, and updating users
  * 
  * @author Rafael Rodriguez - mat574
  *
@@ -21,15 +21,22 @@ public class User {
     private int highScore;
 
     /**
+     * Constructor for the User object
+     * 
      * @param name
+     *            - Name of the new user
      */
     public User(String name) {
         this.name = name;
     }
 
     /**
+     * Constructor for the User object
+     * 
      * @param name
+     *            - Name of the new user
      * @param highScore
+     *            - High score of the new user
      */
     public User(String name, int highScore) {
         this.name = name;
@@ -37,7 +44,7 @@ public class User {
     }
 
     /**
-     * 
+     * Sorts a collection of User objects by highScore
      */
     public static Comparator<User> UserComparator = new Comparator<User>() {
         public int compare(User user1, User user2) {
@@ -48,8 +55,12 @@ public class User {
     };
 
     /**
+     * Writes a new user to the highScores.csv file
+     * 
      * @param user
+     *            - The new user to be added
      * @throws IOException
+     *             - Error in reading or writing from the file
      */
     public void updateStudentDebt(User user) throws IOException {
         Path path = Paths.get("./highScores.csv");
@@ -80,7 +91,7 @@ public class User {
     }
 
     /**
-     * @return
+     * @return - Name of the user
      */
     public String getName() {
         return name;
@@ -88,13 +99,14 @@ public class User {
 
     /**
      * @param name
+     *            - The name of the user to be set
      */
     public void setName(String name) {
         this.name = name;
     }
 
     /**
-     * @return
+     * @return - High score of the user
      */
     public int getHighScore() {
         return highScore;
@@ -102,6 +114,7 @@ public class User {
 
     /**
      * @param highScore
+     *            - High score of the user to be set
      */
     public void setHighScore(int highScore) {
         this.highScore = highScore;

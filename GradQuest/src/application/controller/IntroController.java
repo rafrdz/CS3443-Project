@@ -89,7 +89,7 @@ public class IntroController implements EventHandler<ActionEvent>, Initializable
     }
 
     /**
-     * Validates user input, creates a new user (if needed) and starts the game
+     * Validates user input, creates a new user (if needed), and starts the game
      */
     public void startGame() {
         board.loadUsers();
