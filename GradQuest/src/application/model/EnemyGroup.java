@@ -33,6 +33,7 @@ public class EnemyGroup {
                 String enemyData = scan.nextLine();
                 String[] tokens = enemyData.split(",");
                 ImageView imageView = new ImageView();
+                anchorPane.getChildren().add(imageView);
                 IEntity iEntity = new Enemy(Double.parseDouble(tokens[0]), Double.parseDouble(tokens[1]),imageView,roomNum);
                 tempEnemies.add(iEntity);
             }

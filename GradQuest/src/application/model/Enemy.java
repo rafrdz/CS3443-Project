@@ -14,7 +14,8 @@ public class Enemy extends Entity implements IEntity{
     public Enemy(double x, double y, ImageView imageView, int roomNum) {
 		this.currentX = x;
         this.currentY = y;
-        
+        imageView.setLayoutX(x);
+        imageView.setLayoutY(y);
         try{
 	        switch(roomNum){
 	        case 1:

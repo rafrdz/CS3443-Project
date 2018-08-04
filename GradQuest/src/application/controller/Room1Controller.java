@@ -68,7 +68,7 @@ public class Room1Controller implements Initializable{
 			        player = new Player(0, bottomPane.getHeight() - 64, playerImage,bottomPane);
 			        entities.add(player);
 			        bottomPane.getChildren().add(playerImage);
-			        ArrayList<IEntity> arrayList = EnemyGroup.loadEnemies("east", 1,bottomPane);
+			        ArrayList<IEntity> arrayList = EnemyGroup.loadEnemies("easy",1,bottomPane);
 			        entities.addAll(arrayList);
 				}
 				
@@ -144,9 +144,31 @@ public class Room1Controller implements Initializable{
     		bottomPane.getChildren().remove(entities.get(integer).getImageView());
     		entities.remove(entities.get(integer));
     	}
+    	checkForColisons();
+    	
     }
 
-    public void handleKeyRelease(KeyEvent event){
+    private void checkForColisons() {
+    	ArrayList<IEntity> projectiles = new ArrayList<IEntity>();
+    	ArrayList<IEntity> enemies = new ArrayList<IEntity>();
+    	for(IEntity entity : entities){
+    		if(!(entity instanceof Player)){
+    			if(entity instanceof Projectile){
+    				projectiles.add(entity);
+    			} else if (entity instanceof Enemy ){
+    				enemies.add(entity);
+    			}
+    		}
+    	}
+    	for(IEntity entity: projectiles){
+    		for(IEntity entity2 : enemies){
+    			//entity.checkColision(entity2);
+    		}
+    		
+    	}
+	}
+
+	public void handleKeyRelease(KeyEvent event){
     	switch(event.getCode()){
         case A:
         case W:
