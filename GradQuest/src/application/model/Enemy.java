@@ -22,12 +22,22 @@ public class Enemy extends Entity implements IEntity{
 	        	this.hp = 5;
 	            this.moveSize = 5;
 	            imageView.setImage(Main.ENEMY_ROOM_1);
+	            this.spriteWidth = 50;
+	            this.spriteHeight = 50;
 	        	break;
 	        case 2:
-	        	//TODO room 2 numbers
+	        	this.hp = 7;
+	            this.moveSize = 5;
+	            imageView.setImage(Main.ENEMY_ROOM_1);
+	            this.spriteWidth = 50;
+	            this.spriteHeight = 50;
 	        	break;
 	        case 3:
-	        	//TODO room 3 numbers
+	        	this.hp = 10;
+	            this.moveSize = 5;
+	            imageView.setImage(Main.ENEMY_ROOM_1);
+	            this.spriteWidth = 50;
+	            this.spriteHeight = 50;
 	        	break;
 	        }
         } catch (Exception e){

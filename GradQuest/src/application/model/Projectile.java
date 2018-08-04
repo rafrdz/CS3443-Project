@@ -1,7 +1,9 @@
 package application.model;
 
+import application.animations.SpriteAnimation;
 import javafx.geometry.Point2D;
 import javafx.scene.image.ImageView;
+import javafx.util.Duration;
 
 public class Projectile extends Entity implements IEntity {
 
@@ -14,6 +16,8 @@ public class Projectile extends Entity implements IEntity {
 		this.currentY = currentY;
 		this.moveSize = 6;
 		this.velocity = velocity;
+		this.spriteHeight = 64;
+		this.spriteWidth = 64;
 
 	}
 
@@ -34,8 +38,10 @@ public class Projectile extends Entity implements IEntity {
 
 	@Override
 	public void updateImageView(String direction) {
-		// TODO Auto-generated method stub
-
+			this.animation = new SpriteAnimation(this.imageView, Duration.millis(50),50,
+					10, this.spriteAnimationStartOffsetX, this.spriteAnimationStartoffsetY,
+					this.spriteWidth, this.spriteHeight);
+			animation.play();
 	}
 
 	@Override
@@ -62,18 +68,14 @@ public class Projectile extends Entity implements IEntity {
 
 	@Override
 	public boolean checkColision(IEntity entity2) {
-		Enemy enemy = (Enemy) entity2;
+		Enemy that = (Enemy) entity2;
 	
 		boolean isCollision = false;
-		double thisRightEdge = this.currentX + this.spriteWidth;
-		double thisBottomEdge = this.currentY + this.spriteHeight;
-		double thatRightEdge = enemy.currentX + this.spriteWidth;
-		double thatBottomEdge = enemy.currentY + this.spriteHeight;
 		
-		if(thisBottomEdge <= enemy.getCurrentY() ||
-				thisRightEdge >= enemy.getCurrentY() ||
-				thatRightEdge >= this.currentX ||
-				thatBottomEdge <= this.currentY){
+		if(this.currentX < that.currentX + that.spriteWidth &&
+				this.currentX + this.spriteWidth - 15 > that.currentX &&
+				this.currentY < that.currentY + that.spriteHeight &&
+				this.spriteHeight -15 + this.currentY > that.currentY){
 			isCollision = true;
 		}
 		return isCollision;

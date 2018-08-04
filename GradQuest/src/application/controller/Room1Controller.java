@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import application.Main;
-
+import application.animations.SpriteAnimation;
 import application.model.Enemy;
 import application.model.EnemyGroup;
 import application.model.IEntity;
@@ -53,14 +53,14 @@ public class Room1Controller implements Initializable{
     @FXML
     Rectangle doorShape;
     
-    /*@FXML
-    ImageView playerImage, enemy1Image;*/
-    
     public Player player;
     
     public ArrayList<IEntity> entities = new ArrayList<IEntity>();
     
-    public EnemyGroup enemies;
+    boolean leaveRoom= false;
+    
+    int roomNumber = 0;
+    String difficulty = "";
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -75,7 +75,9 @@ public class Room1Controller implements Initializable{
 			        player = new Player(0, bottomPane.getHeight() - 64, playerImage,bottomPane);
 			        entities.add(player);
 			        bottomPane.getChildren().add(playerImage);
-			        ArrayList<IEntity> arrayList = EnemyGroup.loadEnemies("easy",1,bottomPane);
+			        roomNumber = 1;
+			        ArrayList<IEntity> arrayList = EnemyGroup.loadEnemies(IntroController.difficulty,roomNumber,bottomPane);
+			        
 			        entities.addAll(arrayList);
 				}
 				
@@ -141,6 +143,9 @@ public class Room1Controller implements Initializable{
 		ArrayList<Integer> removedIndexes = new ArrayList<Integer>();
     	for(int i = 0; entities.size() > i; i++){
     		entities.get(i).move();
+    		if(entities.get(i) instanceof Player){
+    			 leaveRoom = checkLeaveRoom();
+    		}
     		if(entities.get(i) instanceof Projectile && entities.get(i).needToRemove()){
     			System.out.println("Removing");
     			removedIndexes.add(i);
@@ -152,10 +157,56 @@ public class Room1Controller implements Initializable{
     		entities.remove(entities.get(integer));
     	}
     	checkForColisons();
-    	
+    	boolean enemiesLeft = false;
+    	for(IEntity entity : entities){
+    		if(entity instanceof Enemy){
+    			enemiesLeft = true;
+    		}
+    	}
+    	if(!enemiesLeft && leaveRoom){
+    		roomNumber++;
+        	if(roomNumber > 3){
+        		endGame();
+        	}
+    		player.getImageView().setLayoutY(bottomPane.getHeight() - 64);
+    		player.setCurrentY(bottomPane.getHeight() - 64);
+    		ArrayList<Integer> projectilesIndexs = new ArrayList<Integer>();
+    		ArrayList<IEntity> projectiles = new ArrayList<IEntity>();
+        	for(int i = 0; entities.size() > i;i++){
+        		if((entities.get(i) instanceof Projectile)){
+        			projectiles.add(entities.get(i));
+        			projectilesIndexs.add(i);
+        		}
+        	}
+        	for(Integer integer : projectilesIndexs){
+        		bottomPane.getChildren().remove(projectiles.get(integer).getImageView());
+        		entities.remove(projectiles.get(integer));
+        	}
+        	
+    		ArrayList<IEntity> arrayList = EnemyGroup.loadEnemies(IntroController.difficulty,roomNumber,bottomPane);
+	        entities.addAll(arrayList);
+    	}
     }
 
-    private void checkForColisons() {
+    private void endGame() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private boolean checkLeaveRoom() {
+    	
+    	boolean isCollision = false;
+		
+		if(player.getCurrentX() < doorShape.getLayoutX() + 80 &&
+				player.getCurrentX() + player.getSpriteWidth() > doorShape.getLayoutX() &&
+				player.getCurrentY() < doorShape.getLayoutY() + 30 &&
+				player.getSpriteHeight() + player.getCurrentY() > doorShape.getLayoutY()){
+			isCollision = true;
+		}
+		return isCollision;
+	}
+
+	private void checkForColisons() {
     	ArrayList<IEntity> projectiles = new ArrayList<IEntity>();
     	ArrayList<IEntity> enemies = new ArrayList<IEntity>();
     	for(IEntity entity : entities){
@@ -170,9 +221,10 @@ public class Room1Controller implements Initializable{
     	ArrayList<Integer> removeProjectileIndexs = new ArrayList<Integer>();
     	ArrayList<Integer> removeEnemyIndexs = new ArrayList<Integer>();
     	for(int i=0 ; projectiles.size() > i;i++){
-    		for(int j=0; enemies.size() > 0;j++){
+    		for(int j=0; enemies.size() > j;j++){
     			boolean wasCollison = projectiles.get(i).checkColision(enemies.get(j));
     			if(wasCollison){
+    				projectiles.get(i).updateImageView("w");
     				removeProjectileIndexs.add(i);
     				boolean death = enemies.get(j).checkForDeath(projectiles.get(i));
     				if(death){
@@ -180,7 +232,16 @@ public class Room1Controller implements Initializable{
     				}
     			}
     		}
-    		
+    	}
+    	for(Integer integer: removeProjectileIndexs){
+    		System.out.println(integer);
+    		bottomPane.getChildren().remove(projectiles.get(integer).getImageView());
+    		entities.remove(projectiles.get(integer));
+    	}
+    	for(Integer integer: removeEnemyIndexs){
+    		System.out.println(integer);
+    		bottomPane.getChildren().remove(enemies.get(integer).getImageView());
+    		entities.remove(enemies.get(integer));
     	}
 	}
 

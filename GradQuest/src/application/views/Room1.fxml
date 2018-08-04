@@ -35,7 +35,7 @@
                </children></AnchorPane>
           <AnchorPane fx:id="bottomPane" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" SplitPane.resizableWithParent="false">
                <children>
-                  <Rectangle fx:id="doorShape" arcHeight="5.0" arcWidth="5.0" fill="#834817" height="15.0" layoutX="209.0" layoutY="-7.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
+                  <Rectangle fx:id="doorShape" arcHeight="5.0" arcWidth="5.0" fill="#834817" height="30.0" layoutX="209.0" layoutY="-7.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
                </children>
           </AnchorPane>
         </items>
