@@ -20,6 +20,8 @@ public class Main extends Application {
     public static Image PLAYER_IMAGE = null;
     public static Image EXPLOSION = null;
     public static Image ENEMY_ROOM_1 = null;
+    public static Image ENEMY_ROOM_2 = null;
+    public static Image ENEMY_ROOM_3 = null;
     public static Stage mainStage;
     public static ExecutorService app;
     
@@ -30,6 +32,8 @@ public class Main extends Application {
 			PLAYER_IMAGE = new Image(new FileInputStream("images/sprite/player.png"));
 			EXPLOSION = new Image(new FileInputStream("images/sprite/explosion01_64.png"));
 			ENEMY_ROOM_1 = new Image(new FileInputStream("images/alarmClock.png"));
+			ENEMY_ROOM_2 = new Image(new FileInputStream("images/student.png"));
+			ENEMY_ROOM_3 = new Image(new FileInputStream("images/evilFace.png"));
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

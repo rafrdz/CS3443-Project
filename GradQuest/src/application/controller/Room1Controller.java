@@ -168,6 +168,7 @@ public class Room1Controller implements Initializable{
         	if(roomNumber > 3){
         		endGame();
         	}
+        	roomLabel.setText("Room" + roomNumber);
     		player.getImageView().setLayoutY(bottomPane.getHeight() - 64);
     		player.setCurrentY(bottomPane.getHeight() - 64);
     		ArrayList<Integer> projectilesIndexs = new ArrayList<Integer>();

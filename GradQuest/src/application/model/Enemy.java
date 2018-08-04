@@ -28,14 +28,14 @@ public class Enemy extends Entity implements IEntity{
 	        case 2:
 	        	this.hp = 7;
 	            this.moveSize = 5;
-	            imageView.setImage(Main.ENEMY_ROOM_1);
+	            imageView.setImage(Main.ENEMY_ROOM_2);
 	            this.spriteWidth = 50;
 	            this.spriteHeight = 50;
 	        	break;
 	        case 3:
 	        	this.hp = 10;
 	            this.moveSize = 5;
-	            imageView.setImage(Main.ENEMY_ROOM_1);
+	            imageView.setImage(Main.ENEMY_ROOM_3);
 	            this.spriteWidth = 50;
 	            this.spriteHeight = 50;
 	        	break;
