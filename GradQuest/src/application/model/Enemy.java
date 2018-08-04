@@ -127,5 +127,13 @@ public class Enemy extends Entity implements IEntity {
         }
         return death;
     }
+    
+    public double getCurrentX() {
+        return this.currentX;
+    }
+    
+    public double getCurrentY() {
+        return this.currentY;
+    }
 
 }

@@ -166,6 +166,12 @@ public class Room1Controller implements Initializable {
 
         ArrayList<Integer> removedIndexes = new ArrayList<Integer>();
         for (int i = 0; entities.size() > i; i++) {
+            if(entities.get(i) instanceof Enemy) {
+                Enemy temp = (Enemy) entities.get(i);
+                ArrayList<Double> moveValues = determineShortestPath(temp.getCurrentX(), temp.getCurrentY());
+                // TODO: Move the enemy based on the x-direction and y-direction in the moveValues list
+                entities.get(i).move();
+            }
             entities.get(i).move();
             if (entities.get(i) instanceof Player) {
                 leaveRoom = checkLeaveRoom();
@@ -406,6 +412,19 @@ public class Room1Controller implements Initializable {
             Stage stage = (Stage) exitButton.getScene().getWindow();
             stage.close();
         }
+    }
+    
+    private ArrayList<Double> determineShortestPath(double curX, double curY) {
+        ArrayList<Double> temp = new ArrayList<Double>();
+        double dirX = player.getCurrentX() - curX;
+        double dirY = player.getCurrentY() - curY;
+        
+        double hypotenuse = Math.sqrt(dirX * dirX + dirY + dirY);
+        dirX /= hypotenuse;
+        dirY /= hypotenuse;
+        temp.add(dirX);
+        temp.add(dirY);
+        return temp;
     }
 
 }
