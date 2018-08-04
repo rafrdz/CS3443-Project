@@ -38,10 +38,10 @@ public class IntroController implements EventHandler<ActionEvent>, Initializable
 
     @FXML
     private Label descriptionLabel, controlsLabel, wText, aText, sText, dText, spaceText, wLabel, aLabel, sLabel,
-            dLabel, spaceLabel, usernameLabel, difficultyLabel;
+            dLabel, spaceLabel, usernameLabel, difficultyLabel, upLabel, downLabel, leftLabel, rightLabel, errorMessage;
 
     @FXML
-    private Rectangle wShape, sShape, dShape, aShape, spaceShape;
+    private Rectangle wShape, sShape, dShape, aShape, spaceShape, downShape, leftShape, rightShape, upShape;
 
     @FXML
     private TextField usernameInput;
@@ -61,6 +61,7 @@ public class IntroController implements EventHandler<ActionEvent>, Initializable
      */
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
+        errorMessage.setVisible(false);
         descriptionTextArea.setEditable(false);
         buildDifficultyOptions();
     }
@@ -88,7 +89,11 @@ public class IntroController implements EventHandler<ActionEvent>, Initializable
      */
     public void startGame() {
         if (validateUserInput(usernameInput.getText())) {
+            errorMessage.setVisible(false);
             currentUser = new User(usernameInput.getText());
+        } else {
+            errorMessage.setVisible(true);
+            return;
         }
         difficulty = difficultyPicker.getValue().toString();
         Main.moveToNextView("../application/views/Room1.fxml");
