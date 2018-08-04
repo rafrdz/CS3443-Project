@@ -5,6 +5,9 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+
 /**
  * Model for the EnemyGroup objects
  * 
@@ -19,19 +22,19 @@ public class EnemyGroup {
         this.enemies = new ArrayList<Enemy>();
     }
     
-    public ArrayList<Enemy> loadEnemies(String difficulty, int roomNum) {
+    public static ArrayList<IEntity> loadEnemies(String difficulty, int roomNum, AnchorPane anchorPane) {
         Scanner scan = null;
         String fileName = "./rooms/" + difficulty.toLowerCase() + "/" + "room" + roomNum + ".csv";
-        Enemy enemy = null;
-        ArrayList<Enemy> tempEnemies = new ArrayList<Enemy>();
+        ArrayList<IEntity> tempEnemies = new ArrayList<IEntity>();
         try {
             scan = new Scanner(new File(fileName));
             
             while(scan.hasNextLine()) {
                 String enemyData = scan.nextLine();
                 String[] tokens = enemyData.split(",");
-                enemy = new Enemy(Double.parseDouble(tokens[0]), Double.parseDouble(tokens[1]));
-                tempEnemies.add(enemy);
+                ImageView imageView = new ImageView();
+                IEntity iEntity = new Enemy(Double.parseDouble(tokens[0]), Double.parseDouble(tokens[1]),imageView,roomNum);
+                tempEnemies.add(iEntity);
             }
         } catch(FileNotFoundException fnfe) {
             fnfe.printStackTrace();

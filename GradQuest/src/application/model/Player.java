@@ -17,6 +17,7 @@ import javafx.util.Duration;
 public class Player extends Entity implements IEntity {
 
 	private String keyPressed = "";
+	private String fireKeyPressed = "";
 	private String directionFacing = "";
 	private double projectileHp = 2;
 
@@ -111,8 +112,8 @@ public class Player extends Entity implements IEntity {
 	@Override
 	public IEntity fireProjectile() {
 		IEntity temp = null;
-		if(!this.keyPressed.equals("")){
-			switch (this.keyPressed) {
+		if(!this.fireKeyPressed.equals("")){
+			switch (this.fireKeyPressed) {
 			case "UP":
 				temp = new Projectile(this.projectileHp, true, this.currentX, this.currentY,new Point2D(0, 1));
 				break;
@@ -157,6 +158,14 @@ public class Player extends Entity implements IEntity {
 	public boolean needToRemove() {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	public String getFireKeyPressed() {
+		return fireKeyPressed;
+	}
+
+	public void setFireKeyPressed(String fireKeyPressed) {
+		this.fireKeyPressed = fireKeyPressed;
 	}
 	
 }

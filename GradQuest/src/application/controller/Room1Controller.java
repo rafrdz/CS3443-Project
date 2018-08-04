@@ -68,6 +68,8 @@ public class Room1Controller implements Initializable{
 			        player = new Player(0, bottomPane.getHeight() - 64, playerImage,bottomPane);
 			        entities.add(player);
 			        bottomPane.getChildren().add(playerImage);
+			        ArrayList<IEntity> arrayList = EnemyGroup.loadEnemies("east", 1,bottomPane);
+			        entities.addAll(arrayList);
 				}
 				
 				if(frames % 2 == 0){
@@ -90,23 +92,46 @@ public class Room1Controller implements Initializable{
     protected void fireProjectiles() {
     	ArrayList<IEntity> newProjectiles = new ArrayList<IEntity>(); 
     	for(IEntity entity : entities){
-    		IEntity newEnitity = entity.fireProjectile();
-    		if(newEnitity != null){
-    			ImageView imageView = new ImageView(Main.EXPLOSION);
-    			imageView.setViewport(new Rectangle2D(256, 128, 64, 64));
-    			newEnitity.setImageView(imageView);
-    			imageView.setLayoutX(player.getCurrentX());
-    			imageView.setLayoutY(player.getCurrentY());
-    			bottomPane.getChildren().add(newEnitity.getImageView());
-    			newProjectiles.add(newEnitity);
+    		if(!(entity instanceof Player)){
+    			IEntity newEnitity = checkForNewProjectile(entity);
+    			if(newEnitity != null){
+    				newProjectiles.add(newEnitity);
+    			}
     		}
     	}
     	entities.addAll(newProjectiles);
+    }
+
+
+	private IEntity checkForNewProjectile(IEntity entity) {
+		IEntity newEnitity = entity.fireProjectile();
+		if(newEnitity != null){
+			ImageView imageView = new ImageView(Main.EXPLOSION);
+			imageView.setViewport(new Rectangle2D(256, 128, 64, 64));
+			newEnitity.setImageView(imageView);
+			imageView.setLayoutX(player.getCurrentX());
+			imageView.setLayoutY(player.getCurrentY());
+			bottomPane.getChildren().add(newEnitity.getImageView());
+		}
+		return newEnitity;
 	}
 
-
 	protected void update() {
-    	ArrayList<Integer> removedIndexes = new ArrayList<Integer>();
+		ArrayList<IEntity> newProjectiles = new ArrayList<IEntity>(); 
+    	if(player.getFireKeyPressed() != ""){
+    		for(IEntity entity : entities){
+        		if(entity instanceof Player){
+        			IEntity newEnitity = checkForNewProjectile(entity);
+        			if(newEnitity != null){
+        				newProjectiles.add(newEnitity);
+        				player.setFireKeyPressed("");
+        			}
+            	}
+    		}	
+    	}
+    	entities.addAll(newProjectiles);
+    	
+		ArrayList<Integer> removedIndexes = new ArrayList<Integer>();
     	for(int i = 0; entities.size() > i; i++){
     		entities.get(i).move();
     		if(entities.get(i) instanceof Projectile && entities.get(i).needToRemove()){
@@ -122,12 +147,36 @@ public class Room1Controller implements Initializable{
     }
 
     public void handleKeyRelease(KeyEvent event){
-    	player.setKeyPressed("");
+    	switch(event.getCode()){
+        case A:
+        case W:
+        case S:
+        case D:
+        	player.setKeyPressed("");
+        	break;
+        	default:
+        		break;
+        }
     }
     
 	public void handleKeyPressed(KeyEvent event) {
         String keyPressed = event.getCode().toString();
-        player.setKeyPressed(keyPressed);
+        switch(event.getCode()){
+        case A:
+        case W:
+        case S:
+        case D:
+        	player.setKeyPressed(keyPressed);
+        	break;
+        case UP:
+        case DOWN:
+        case RIGHT:
+        case LEFT:
+        	player.setFireKeyPressed(keyPressed);
+        	break;
+        	default:
+        		break;
+        }
     }
     
     private void getUserInfo() {

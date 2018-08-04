@@ -19,7 +19,8 @@ public class Main extends Application {
     
     public static Image PLAYER_IMAGE = null;
     public static Image EXPLOSION = null;
-	public static Stage mainStage;
+    public static Image ENEMY_ROOM_1 = null;
+    public static Stage mainStage;
     public static ExecutorService app;
     
     @Override
@@ -28,6 +29,7 @@ public class Main extends Application {
         try {
 			PLAYER_IMAGE = new Image(new FileInputStream("images/sprite/player.png"));
 			EXPLOSION = new Image(new FileInputStream("images/sprite/explosion01_64.png"));
+			ENEMY_ROOM_1 = new Image(new FileInputStream("images/alarmClock.png"));
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
