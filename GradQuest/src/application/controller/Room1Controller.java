@@ -46,7 +46,7 @@ public class Room1Controller implements Initializable {
     SplitPane splitPane;
 
     @FXML
-    Label roomLabel, playerLabel, debtValue, debtLabel;
+    Label roomLabel, difficultyLabel, playerLabel, debtValue, debtLabel;
 
     @FXML
     Button homeButton, exitButton;
@@ -59,6 +59,8 @@ public class Room1Controller implements Initializable {
     public ArrayList<IEntity> entities = new ArrayList<IEntity>();
 
     boolean leaveRoom = false;
+    
+    boolean gameOver = false;
 
     int roomNumber = 0;
     String difficulty = "";
@@ -71,7 +73,8 @@ public class Room1Controller implements Initializable {
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        getUserInfo();
+        setUserInfo();
+        setDifficultyLabel();
         runDebtThread();
         new AnimationTimer() {
             int frames = 0;
@@ -86,12 +89,14 @@ public class Room1Controller implements Initializable {
                     roomNumber = 1;
                     ArrayList<IEntity> arrayList = EnemyGroup.loadEnemies(IntroController.difficulty, roomNumber,
                             bottomPane);
-
                     entities.addAll(arrayList);
                 }
-
                 if (frames % 2 == 0) {
-                    update();
+                    if(!gameOver) {
+                        update();
+                    } else {
+                        this.stop();
+                    }
                 }
                 if (frames % 30 == 0) {
                     fireProjectiles();
@@ -175,7 +180,7 @@ public class Room1Controller implements Initializable {
             bottomPane.getChildren().remove(entities.get(integer).getImageView());
             entities.remove(entities.get(integer));
         }
-        checkForColisons();
+        checkForCollisions();
         boolean enemiesLeft = false;
         for (IEntity entity : entities) {
             if (entity instanceof Enemy) {
@@ -186,8 +191,9 @@ public class Room1Controller implements Initializable {
             roomNumber++;
             if (roomNumber > 3) {
                 endGame();
+                return;
             }
-            roomLabel.setText("Room" + roomNumber);
+            roomLabel.setText("Room " + roomNumber);
             player.getImageView().setLayoutY(bottomPane.getHeight() - 64);
             player.setCurrentY(bottomPane.getHeight() - 64);
             ArrayList<Integer> projectilesIndexs = new ArrayList<Integer>();
@@ -213,7 +219,16 @@ public class Room1Controller implements Initializable {
      */
     private void endGame() {
         User currentUser = IntroController.currentUser;
+        String difficulty = IntroController.difficulty;
         int newScore = Integer.parseInt(debtValue.getText());
+        
+        if("Easy".equals(difficulty)) {
+            newScore = newScore * 3;
+        } else if ("Medium".equals(difficulty)) {
+            newScore = newScore * 2;
+        } else {
+            newScore = newScore * 1;
+        }
         currentUser.setHighScore(newScore);
         try {
             currentUser.updateStudentDebt(currentUser);
@@ -221,6 +236,7 @@ public class Room1Controller implements Initializable {
             e.printStackTrace();
         }
         player.setKeyPressed("");
+        gameOver = true;
         Main.moveToNextView("../application/views/HighScore.fxml");
     }
 
@@ -243,7 +259,7 @@ public class Room1Controller implements Initializable {
     /**
      * 
      */
-    private void checkForColisons() {
+    private void checkForCollisions() {
         ArrayList<IEntity> projectiles = new ArrayList<IEntity>();
         ArrayList<IEntity> enemies = new ArrayList<IEntity>();
         for (IEntity entity : entities) {
@@ -324,8 +340,12 @@ public class Room1Controller implements Initializable {
     /**
      * 
      */
-    private void getUserInfo() {
+    private void setUserInfo() {
         playerLabel.setText("Player: " + IntroController.currentUser.getName());
+    }
+    
+    private void setDifficultyLabel() {
+        difficultyLabel.setText("-" + IntroController.difficulty);
     }
 
     /**
@@ -333,7 +353,7 @@ public class Room1Controller implements Initializable {
      */
     public void runDebtThread() {
         try {
-            Thread th = new Thread(new Task() {
+            Thread th = new Thread(new Task<Object>() {
                 @Override
                 protected String call() throws Exception {
                     for (int i = 1000; i <= Integer.MAX_VALUE; i += 1000) {

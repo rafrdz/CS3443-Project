@@ -25,7 +25,7 @@
                   <Font name="Arial" size="14.0" />
                </font>
             </Button>
-            <Button fx:id="highScores" layoutX="200.0" layoutY="289.0" mnemonicParsing="false" onAction="#toHighScores" prefHeight="50.0" prefWidth="100.0" text="High Scores">
+            <Button fx:id="highScores" layoutX="200.0" layoutY="289.0" mnemonicParsing="false" onAction="#toHighScores" prefHeight="50.0" prefWidth="100.0" text="Debt Scores">
                <font>
                   <Font name="Arial" size="14.0" />
                </font>
