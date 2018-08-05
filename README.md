@@ -11,5 +11,5 @@ High Scores file: The application only works of there is at least one entry in t
 
 # Contributors
 Rafael Rodriguez<br/>
-David Brenner
+David Brenner<br/>
 Max Renderos-Flores
