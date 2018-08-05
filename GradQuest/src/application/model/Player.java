@@ -63,7 +63,9 @@ public class Player extends Entity implements IEntity {
         }
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see application.model.IEntity#updateImageView(java.lang.String)
      */
     @Override
@@ -95,7 +97,6 @@ public class Player extends Entity implements IEntity {
                     this.spriteWidth, this.spriteHeight);
             animation.play();
         }
-
         for (int i = 0; this.moveSize > i; i++) {
             switch (direction) {
             case "W":
@@ -110,10 +111,8 @@ public class Player extends Entity implements IEntity {
             case "D":
                 this.imageView.setLayoutX(this.currentX += 1);
                 break;
-
             }
         }
-
         System.out.println("New X: " + this.currentX + " New Y: " + this.currentY);
     }
 
@@ -230,17 +229,15 @@ public class Player extends Entity implements IEntity {
      */
     @Override
     public boolean checkCollision(IEntity entity2) {
-        // TODO Auto-generated method stub
         Enemy e = (Enemy) entity2;
 
-        boolean xOverlap = this.currentX + this.getSpriteWidth() - 40 > e.currentX   &&
-                            this.currentX + 40 < e.currentX + e.spriteWidth;
-        boolean yOverlap = this.currentY + 40 < e.currentY + e.spriteHeight &&
-                            this.currentY + this.getSpriteHeight() > e.currentY;
-        if(yOverlap && xOverlap){
+        boolean xOverlap = this.currentX + this.getSpriteWidth() - 40 > e.currentX
+                && this.currentX + 40 < e.currentX + e.spriteWidth;
+        boolean yOverlap = this.currentY + 40 < e.currentY + e.spriteHeight
+                && this.currentY + this.getSpriteHeight() > e.currentY;
+        if (yOverlap && xOverlap) {
             return true;
         }
-
         return false;
     }
 
@@ -251,9 +248,8 @@ public class Player extends Entity implements IEntity {
      */
     @Override
     public boolean checkForDeath(IEntity iEntity) {
-        if(this.currentX == 40)
+        if (this.currentX == 40)
             System.out.println("ah");
-        // TODO Auto-generated method stub
         return false;
     }
 

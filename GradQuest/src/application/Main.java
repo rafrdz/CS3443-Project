@@ -37,7 +37,7 @@ public class Main extends Application {
             EXPLOSION = new Image(new FileInputStream("images/sprite/explosion01_64.png"));
             ENEMY_ROOM_1 = new Image(new FileInputStream("images/alarmClock.png"));
             ENEMY_ROOM_2 = new Image(new FileInputStream("images/fGrade.png"));
-            ENEMY_ROOM_3 = new Image(new FileInputStream("images/debt.png"));
+            ENEMY_ROOM_3 = new Image(new FileInputStream("images/loan.jpg"));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }

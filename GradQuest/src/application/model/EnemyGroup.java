@@ -45,7 +45,7 @@ public class EnemyGroup {
                 ImageView imageView = new ImageView();
                 anchorPane.getChildren().add(imageView);
                 IEntity iEntity = new Enemy(Double.parseDouble(tokens[0]), Double.parseDouble(tokens[1]), imageView,
-                        roomNum);
+                        roomNum, anchorPane);
                 tempEnemies.add(iEntity);
             }
         } catch (FileNotFoundException fnfe) {

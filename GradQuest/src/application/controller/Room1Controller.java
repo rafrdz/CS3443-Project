@@ -27,6 +27,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
@@ -53,6 +54,9 @@ public class Room1Controller implements Initializable {
 
     @FXML
     Rectangle doorShape;
+
+    @FXML
+    Circle doorKnob;
 
     public Player player;
 
@@ -166,12 +170,6 @@ public class Room1Controller implements Initializable {
 
         ArrayList<Integer> removedIndexes = new ArrayList<Integer>();
         for (int i = 0; entities.size() > i; i++) {
-            if(entities.get(i) instanceof Enemy) {
-                Enemy temp = (Enemy) entities.get(i);
-                ArrayList<Double> moveValues = determineShortestPath(temp.getCurrentX(), temp.getCurrentY());
-                // TODO: Move the enemy based on the x-direction and y-direction in the moveValues list
-                entities.get(i).move();
-            }
             entities.get(i).move();
             if (entities.get(i) instanceof Player) {
                 leaveRoom = checkLeaveRoom();
@@ -295,15 +293,13 @@ public class Room1Controller implements Initializable {
                 }
             }
         }
-        if(!enemies.isEmpty()){
-            for(IEntity e : enemies){
+        if (!enemies.isEmpty()) {
+            for (IEntity e : enemies) {
                 boolean playerCollison = player.checkCollision(e);
-                if(playerCollison)
+                if (playerCollison)
                     endGame();
             }
-
         }
-
         for (Integer integer : removeProjectileIndexs) {
             System.out.println(integer);
             bottomPane.getChildren().remove(projectiles.get(integer).getImageView());
@@ -421,19 +417,6 @@ public class Room1Controller implements Initializable {
             Stage stage = (Stage) exitButton.getScene().getWindow();
             stage.close();
         }
-    }
-    
-    private ArrayList<Double> determineShortestPath(double curX, double curY) {
-        ArrayList<Double> temp = new ArrayList<Double>();
-        double dirX = player.getCurrentX() - curX;
-        double dirY = player.getCurrentY() - curY;
-        
-        double hypotenuse = Math.sqrt(dirX * dirX + dirY + dirY);
-        dirX /= hypotenuse;
-        dirY /= hypotenuse;
-        temp.add(dirX);
-        temp.add(dirY);
-        return temp;
     }
 
 }

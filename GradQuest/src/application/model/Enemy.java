@@ -1,7 +1,10 @@
 package application.model;
 
+import java.util.Random;
+
 import application.Main;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 
 /**
  * Model for the Enemy object
@@ -18,11 +21,12 @@ public class Enemy extends Entity implements IEntity {
      * @param imageView
      * @param roomNum
      */
-    public Enemy(double x, double y, ImageView imageView, int roomNum) {
+    public Enemy(double x, double y, ImageView imageView, int roomNum, AnchorPane anchorPane) {
         this.currentX = x;
         this.currentY = y;
         imageView.setLayoutX(x);
         imageView.setLayoutY(y);
+        this.backgroundPane = anchorPane;
         try {
             switch (roomNum) {
             case 1:
@@ -60,8 +64,14 @@ public class Enemy extends Entity implements IEntity {
      */
     @Override
     public void move() {
-        // TODO Auto-generated method stub
-
+        final String moveDirection = "WASD";
+        final int length = moveDirection.length();
+        Random rand = new Random();
+        String randomDirection = String.valueOf(moveDirection.charAt(rand.nextInt(length)));
+        boolean validMove = this.determineMove(randomDirection);
+        if(validMove) {
+            updateImageView(randomDirection);
+        }
     }
 
     /*
@@ -71,8 +81,20 @@ public class Enemy extends Entity implements IEntity {
      */
     @Override
     public void updateImageView(String direction) {
-        // TODO Auto-generated method stub
-
+        switch (direction) {
+        case "W":
+            this.imageView.setLayoutY(this.currentY -= this.moveSize);
+            break;
+        case "A":
+            this.imageView.setLayoutX(this.currentX -= this.moveSize);
+            break;
+        case "S":
+            this.imageView.setLayoutY(this.currentY += this.moveSize);
+            break;
+        case "D":
+            this.imageView.setLayoutX(this.currentX += this.moveSize);
+            break;
+        }
     }
 
     /*
@@ -83,9 +105,7 @@ public class Enemy extends Entity implements IEntity {
     @Override
     public IEntity fireProjectile() {
         IEntity temp = null;
-
         return temp;
-
     }
 
     /*
@@ -126,14 +146,6 @@ public class Enemy extends Entity implements IEntity {
             this.hp -= damageDone;
         }
         return death;
-    }
-    
-    public double getCurrentX() {
-        return this.currentX;
-    }
-    
-    public double getCurrentY() {
-        return this.currentY;
     }
 
 }
