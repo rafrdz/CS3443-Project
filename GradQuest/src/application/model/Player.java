@@ -7,6 +7,7 @@ import javafx.geometry.Rectangle2D;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
+import application.model.Enemy;
 
 /**
  * Model for the Player object
@@ -230,6 +231,16 @@ public class Player extends Entity implements IEntity {
     @Override
     public boolean checkCollision(IEntity entity2) {
         // TODO Auto-generated method stub
+        Enemy e = (Enemy) entity2;
+
+        boolean xOverlap = this.currentX + this.getSpriteWidth() - 40 > e.currentX   &&
+                            this.currentX + 40 < e.currentX + e.spriteWidth;
+        boolean yOverlap = this.currentY + 40 < e.currentY + e.spriteHeight &&
+                            this.currentY + this.getSpriteHeight() > e.currentY;
+        if(yOverlap && xOverlap){
+            return true;
+        }
+
         return false;
     }
 
@@ -240,6 +251,8 @@ public class Player extends Entity implements IEntity {
      */
     @Override
     public boolean checkForDeath(IEntity iEntity) {
+        if(this.currentX == 40)
+            System.out.println("ah");
         // TODO Auto-generated method stub
         return false;
     }

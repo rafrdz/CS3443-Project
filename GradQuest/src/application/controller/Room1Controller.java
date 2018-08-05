@@ -295,6 +295,15 @@ public class Room1Controller implements Initializable {
                 }
             }
         }
+        if(!enemies.isEmpty()){
+            for(IEntity e : enemies){
+                boolean playerCollison = player.checkCollision(e);
+                if(playerCollison)
+                    endGame();
+            }
+
+        }
+
         for (Integer integer : removeProjectileIndexs) {
             System.out.println(integer);
             bottomPane.getChildren().remove(projectiles.get(integer).getImageView());
