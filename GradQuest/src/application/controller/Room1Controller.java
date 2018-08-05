@@ -35,7 +35,7 @@ import javafx.stage.Stage;
  * 
  * @author Rafael Rodriguez - mat574
  * @author David Brenner - iqc287
- *
+ * @author Max Renderos-Flores - nzt280
  */
 public class Room1Controller implements Initializable {
 
