@@ -1,5 +1,7 @@
 package application.model;
 
+import java.util.ArrayList;
+
 import application.Main;
 import application.animations.SpriteAnimation;
 import javafx.geometry.Point2D;
@@ -22,6 +24,8 @@ public class Player extends Entity implements IEntity {
     private String fireKeyPressed = "";
     private String directionFacing = "";
     private double projectileHp = 2;
+    
+    private ArrayList<String> movements = new ArrayList<String>();
 
     /**
      * @param x
@@ -57,11 +61,14 @@ public class Player extends Entity implements IEntity {
      */
     @Override
     public void move() {
-        boolean validMove = this.determineMove(this.keyPressed);
-        if (validMove) {
-            updateImageView(this.keyPressed);
-        }
-    }
+    	if(!movements.isEmpty()){
+    		String temp = movements.get(movements.size()-1);
+            boolean validMove = this.determineMove(temp);
+            if (validMove) {
+                updateImageView(temp);
+            }
+    	}
+	}
 
     /*
      * (non-Javadoc)
@@ -252,5 +259,13 @@ public class Player extends Entity implements IEntity {
             System.out.println("ah");
         return false;
     }
+
+	public ArrayList<String> getMovements() {
+		return movements;
+	}
+
+	public void setMovements(ArrayList<String> movements) {
+		this.movements = movements;
+	}
 
 }

@@ -102,7 +102,8 @@ public class Room1Controller implements Initializable {
                         this.stop();
                     }
                 }
-                if (frames % 30 == 0) {
+                if (frames % 10 == 0) {
+                	updateKeyPressEvent();
                     fireProjectiles();
                 }
                 frames++;
@@ -110,7 +111,14 @@ public class Room1Controller implements Initializable {
         }.start();
     }
 
-    /**
+    protected void updateKeyPressEvent() {
+    	/*if(!keyPress.equals(player.getKeyPressed())){
+    		player.setKeyPressed(keyPress);
+    	}*/
+
+	}
+
+	/**
      * Returns the user to the starting view
      */
     public void returnHome() {
@@ -324,8 +332,11 @@ public class Room1Controller implements Initializable {
         case W:
         case S:
         case D:
-            player.setKeyPressed("");
-            break;
+            if(player.getMovements().contains(event.getCode().toString())){
+            	player.getMovements().remove(event.getCode().toString());
+            }
+        	//keyPress = "";
+        	break;
         default:
             break;
         }
@@ -344,7 +355,9 @@ public class Room1Controller implements Initializable {
         case W:
         case S:
         case D:
-            player.setKeyPressed(keyPressed);
+        	if(!player.getMovements().contains(event.getCode().toString())){
+        		player.getMovements().add(event.getCode().toString());
+            }
             break;
         case UP:
         case DOWN:
@@ -356,6 +369,7 @@ public class Room1Controller implements Initializable {
             break;
         }
     }
+
 
     /**
      * Sets the user name in the information section of the game view
