@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * Leaderboard object for holding, updating, creating, and checking for Users
+ * Leaderboard class for holding, updating, creating, and checking for Users
  * 
  * @author Rafael Rodriguez - mat574
  *

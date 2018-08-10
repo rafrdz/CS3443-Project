@@ -24,14 +24,20 @@ public class Player extends Entity implements IEntity {
     private String fireKeyPressed = "";
     private String directionFacing = "";
     private double projectileHp = 2;
-    
+
     private ArrayList<String> movements = new ArrayList<String>();
 
     /**
+     * Constructor for a player object
+     * 
      * @param x
+     *            - The starting x coordinate of the player
      * @param y
+     *            - The starting y coordinate of the player
      * @param imageView
+     *            - The imageview of the player
      * @param anchorPane
+     *            - The pane that the player will be on
      */
     public Player(double x, double y, ImageView imageView, AnchorPane anchorPane) {
         this.currentX = x;
@@ -61,14 +67,14 @@ public class Player extends Entity implements IEntity {
      */
     @Override
     public void move() {
-    	if(!movements.isEmpty()){
-    		String temp = movements.get(movements.size()-1);
+        if (!movements.isEmpty()) {
+            String temp = movements.get(movements.size() - 1);
             boolean validMove = this.determineMove(temp);
             if (validMove) {
                 updateImageView(temp);
             }
-    	}
-	}
+        }
+    }
 
     /*
      * (non-Javadoc)
@@ -124,7 +130,7 @@ public class Player extends Entity implements IEntity {
     }
 
     /**
-     * @return
+     * @return - A string representation of the key that was pressed
      */
     public String getKeyPressed() {
         return keyPressed;
@@ -132,6 +138,7 @@ public class Player extends Entity implements IEntity {
 
     /**
      * @param keyPressed
+     *            - The key that was pressed to be set
      */
     public void setKeyPressed(String keyPressed) {
         this.keyPressed = keyPressed;
@@ -177,7 +184,7 @@ public class Player extends Entity implements IEntity {
     };
 
     /**
-     * @return
+     * @return - The direction that the player is facing
      */
     public String getDirectionFacing() {
         return directionFacing;
@@ -185,13 +192,14 @@ public class Player extends Entity implements IEntity {
 
     /**
      * @param directionFacing
+     *            - The direction to be set
      */
     public void setDirectionFacing(String directionFacing) {
         this.directionFacing = directionFacing;
     }
 
     /**
-     * @return
+     * @return - The HP of the projectile fired by the player
      */
     public double getProjectileHp() {
         return projectileHp;
@@ -199,6 +207,7 @@ public class Player extends Entity implements IEntity {
 
     /**
      * @param projectileHp
+     *            - The HP of the projectile to be set
      */
     public void setProjectileHp(double projectileHp) {
         this.projectileHp = projectileHp;
@@ -211,12 +220,11 @@ public class Player extends Entity implements IEntity {
      */
     @Override
     public boolean needToRemove() {
-        // TODO Auto-generated method stub
         return false;
     }
 
     /**
-     * @return
+     * @return - The direction that the projectile will be fired in
      */
     public String getFireKeyPressed() {
         return fireKeyPressed;
@@ -224,6 +232,7 @@ public class Player extends Entity implements IEntity {
 
     /**
      * @param fireKeyPressed
+     *            - The direction of the projectile to be set
      */
     public void setFireKeyPressed(String fireKeyPressed) {
         this.fireKeyPressed = fireKeyPressed;
@@ -260,12 +269,19 @@ public class Player extends Entity implements IEntity {
         return false;
     }
 
-	public ArrayList<String> getMovements() {
-		return movements;
-	}
+    /**
+     * @return - A list of movement directions
+     */
+    public ArrayList<String> getMovements() {
+        return movements;
+    }
 
-	public void setMovements(ArrayList<String> movements) {
-		this.movements = movements;
-	}
+    /**
+     * @param movements
+     *            - A list of movement directions to be set
+     */
+    public void setMovements(ArrayList<String> movements) {
+        this.movements = movements;
+    }
 
 }

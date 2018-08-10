@@ -115,7 +115,6 @@ public class Enemy extends Entity implements IEntity {
      */
     @Override
     public boolean needToRemove() {
-        // TODO Auto-generated method stub
         return false;
     }
 
@@ -126,7 +125,6 @@ public class Enemy extends Entity implements IEntity {
      */
     @Override
     public boolean checkCollision(IEntity entity2) {
-        // TODO Auto-generated method stub
         return false;
     }
 

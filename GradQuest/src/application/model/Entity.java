@@ -30,10 +30,16 @@ public abstract class Entity {
     AnchorPane backgroundPane;
 
     /**
+     * Determines whether or not a move being made by an entity is legal (will not
+     * exit the pane)
+     * 
      * @param curX
+     *            - The current x coordinate of the entity
      * @param curY
+     *            - The current y coordinate of the entity
      * @param direction
-     * @return
+     *            - The direction that the entity plans on moving
+     * @return - Whether or not the move is valid
      */
     public boolean isLegalMove(double curX, double curY, String direction) {
         boolean ret = false;
@@ -61,8 +67,11 @@ public abstract class Entity {
     }
 
     /**
+     * Determines if a proposed move direction is valid
+     * 
      * @param direction
-     * @return
+     *            - The direction to be moved
+     * @return - Whether a proposed move is valid
      */
     public boolean determineMove(String direction) {
         boolean validMove = false;
@@ -92,7 +101,7 @@ public abstract class Entity {
     }
 
     /**
-     * @return
+     * @return - The velocity of the entity
      */
     public Point2D getVelocity() {
         return velocity;
@@ -100,13 +109,14 @@ public abstract class Entity {
 
     /**
      * @param velocity
+     *            - A velocity to be set
      */
     public void setVelocity(Point2D velocity) {
         this.velocity = velocity;
     }
 
     /**
-     * @return
+     * @return - A SpriteAnimation object
      */
     public SpriteAnimation getAnimation() {
         return animation;
@@ -114,13 +124,14 @@ public abstract class Entity {
 
     /**
      * @param animation
+     *            - The SpriteAnimation object to be set
      */
     public void setAnimation(SpriteAnimation animation) {
         this.animation = animation;
     }
 
     /**
-     * @return
+     * @return - The move size of the entity
      */
     public double getMoveSize() {
         return moveSize;
@@ -128,6 +139,7 @@ public abstract class Entity {
 
     /**
      * @param moveSize
+     *            - The move size to be set
      */
     public void setMoveSize(double moveSize) {
         this.moveSize = moveSize;
@@ -135,6 +147,7 @@ public abstract class Entity {
 
     /**
      * @param currentX
+     *            - The current x coordinate to be set
      */
     public void setCurrentX(double currentX) {
         this.currentX = currentX;
@@ -142,6 +155,7 @@ public abstract class Entity {
 
     /**
      * @param currentY
+     *            - The current y coordinate to be set
      */
     public void setCurrentY(double currentY) {
         this.currentY = currentY;
@@ -149,34 +163,35 @@ public abstract class Entity {
 
     /**
      * @param hp
+     *            - The HP of the entity to be set
      */
     public void setHp(double hp) {
         this.hp = hp;
     }
 
     /**
-     * @return
+     * @return - The current x coordinate of the entity
      */
     public double getCurrentX() {
         return currentX;
     }
 
     /**
-     * @return
+     * @return - The current y coordinate of the entity
      */
     public double getCurrentY() {
         return currentY;
     }
 
     /**
-     * @return
+     * @return - The HP of the entity
      */
     public double getHp() {
         return hp;
     }
 
     /**
-     * @return
+     * @return - The frame count of the sprite
      */
     public int getSpriteFrameCount() {
         return spriteFrameCount;
@@ -184,13 +199,14 @@ public abstract class Entity {
 
     /**
      * @param spriteFrameCount
+     *            - The frame count to be set
      */
     public void setSpriteFrameCount(int spriteFrameCount) {
         this.spriteFrameCount = spriteFrameCount;
     }
 
     /**
-     * @return
+     * @return - The number of columns in the sprite sheet
      */
     public int getSpriteColumnsCount() {
         return spriteColumnsCount;
@@ -198,13 +214,14 @@ public abstract class Entity {
 
     /**
      * @param spriteColumnsCount
+     *            - The number of columns in the sprite sheet to be set
      */
     public void setSpriteColumnsCount(int spriteColumnsCount) {
         this.spriteColumnsCount = spriteColumnsCount;
     }
 
     /**
-     * @return
+     * @return - The offset starting x position
      */
     public int getSpriteAnimationStartOffsetX() {
         return spriteAnimationStartOffsetX;
@@ -212,13 +229,14 @@ public abstract class Entity {
 
     /**
      * @param spriteAnimationStartOffsetX
+     *            - The offset starting x position to be set
      */
     public void setSpriteAnimationStartOffsetX(int spriteAnimationStartOffsetX) {
         this.spriteAnimationStartOffsetX = spriteAnimationStartOffsetX;
     }
 
     /**
-     * @return
+     * @return - The offset starting y position
      */
     public int getSpriteAnimationStartoffsetY() {
         return spriteAnimationStartoffsetY;
@@ -226,13 +244,14 @@ public abstract class Entity {
 
     /**
      * @param spriteAnimationStartoffsetY
+     *            - The offset starting y position to be set
      */
     public void setSpriteAnimationStartoffsetY(int spriteAnimationStartoffsetY) {
         this.spriteAnimationStartoffsetY = spriteAnimationStartoffsetY;
     }
 
     /**
-     * @return
+     * @return - The height of the sprite
      */
     public int getSpriteHeight() {
         return spriteHeight;
@@ -240,13 +259,14 @@ public abstract class Entity {
 
     /**
      * @param spriteHeight
+     *            - The height of the sprite to be set
      */
     public void setSpriteHeight(int spriteHeight) {
         this.spriteHeight = spriteHeight;
     }
 
     /**
-     * @return
+     * @return - The width of the sprite
      */
     public int getSpriteWidth() {
         return spriteWidth;
@@ -254,13 +274,14 @@ public abstract class Entity {
 
     /**
      * @param spriteWidth
+     *            - The width of the sprite to be set
      */
     public void setSpriteWidth(int spriteWidth) {
         this.spriteWidth = spriteWidth;
     }
 
     /**
-     * @return
+     * @return - The imageview of the entity
      */
     public ImageView getImageView() {
         return imageView;
@@ -268,13 +289,14 @@ public abstract class Entity {
 
     /**
      * @param imageView
+     *            - The imageview of the entity to be set
      */
     public void setImageView(ImageView imageView) {
         this.imageView = imageView;
     }
 
     /**
-     * @return
+     * @return - The background pane that the entity is on
      */
     public AnchorPane getBackgroundPane() {
         return backgroundPane;
@@ -282,6 +304,7 @@ public abstract class Entity {
 
     /**
      * @param backgroundPane
+     *            - The background pane to be set
      */
     public void setBackgroundPane(AnchorPane backgroundPane) {
         this.backgroundPane = backgroundPane;

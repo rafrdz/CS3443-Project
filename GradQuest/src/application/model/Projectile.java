@@ -128,7 +128,6 @@ public class Projectile extends Entity implements IEntity {
      */
     @Override
     public boolean checkForDeath(IEntity iEntity) {
-        // TODO Auto-generated method stub
         return false;
     }
 

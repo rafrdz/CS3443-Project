@@ -9,7 +9,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
 /**
- * Model for the EnemyGroup objects
+ * Model for the EnemyGroup objects which holds a collection of Enemies
  * 
  * @author Rafael Rodriguez - mat574
  * @author David Brenner - iqc287
@@ -20,17 +20,22 @@ public class EnemyGroup {
     private ArrayList<Enemy> enemies;
 
     /**
-     * 
+     * Constructor for the EnemyGroup object
      */
     public EnemyGroup() {
         this.enemies = new ArrayList<Enemy>();
     }
 
     /**
+     * Loads the enemies (entities) from the appropriate csv file
+     * 
      * @param difficulty
+     *            - The difficulty that the user selected
      * @param roomNum
+     *            - The room number to be loaded
      * @param anchorPane
-     * @return
+     *            - The pane that the enemies will be displayed on
+     * @return - A list of entities to place on the view
      */
     public static ArrayList<IEntity> loadEnemies(String difficulty, int roomNum, AnchorPane anchorPane) {
         Scanner scan = null;
@@ -59,7 +64,7 @@ public class EnemyGroup {
     }
 
     /**
-     * @return
+     * @return - A list of enemies
      */
     public ArrayList<Enemy> getEnemies() {
         return enemies;
@@ -67,6 +72,7 @@ public class EnemyGroup {
 
     /**
      * @param enemies
+     *            - A list of enemies to be set
      */
     public void setEnemies(ArrayList<Enemy> enemies) {
         this.enemies = enemies;

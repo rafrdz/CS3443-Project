@@ -103,7 +103,7 @@ public class Room1Controller implements Initializable {
                     }
                 }
                 if (frames % 10 == 0) {
-                	updateKeyPressEvent();
+                    updateKeyPressEvent();
                     fireProjectiles();
                 }
                 frames++;
@@ -112,13 +112,14 @@ public class Room1Controller implements Initializable {
     }
 
     protected void updateKeyPressEvent() {
-    	/*if(!keyPress.equals(player.getKeyPressed())){
-    		player.setKeyPressed(keyPress);
-    	}*/
+        /*
+         * if(!keyPress.equals(player.getKeyPressed())){ player.setKeyPressed(keyPress);
+         * }
+         */
 
-	}
+    }
 
-	/**
+    /**
      * Returns the user to the starting view
      */
     public void returnHome() {
@@ -332,11 +333,11 @@ public class Room1Controller implements Initializable {
         case W:
         case S:
         case D:
-            if(player.getMovements().contains(event.getCode().toString())){
-            	player.getMovements().remove(event.getCode().toString());
+            if (player.getMovements().contains(event.getCode().toString())) {
+                player.getMovements().remove(event.getCode().toString());
             }
-        	//keyPress = "";
-        	break;
+            // keyPress = "";
+            break;
         default:
             break;
         }
@@ -355,8 +356,8 @@ public class Room1Controller implements Initializable {
         case W:
         case S:
         case D:
-        	if(!player.getMovements().contains(event.getCode().toString())){
-        		player.getMovements().add(event.getCode().toString());
+            if (!player.getMovements().contains(event.getCode().toString())) {
+                player.getMovements().add(event.getCode().toString());
             }
             break;
         case UP:
@@ -369,7 +370,6 @@ public class Room1Controller implements Initializable {
             break;
         }
     }
-
 
     /**
      * Sets the user name in the information section of the game view
@@ -415,7 +415,7 @@ public class Room1Controller implements Initializable {
     }
 
     /**
-     * Exits the game
+     * Exits the game by clicking on the Exit Button or by pressing the "Escape" key
      * 
      * @param event
      *            - Keyboard input
