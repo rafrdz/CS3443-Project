@@ -20,12 +20,11 @@ import application.model.Enemy;
  */
 public class Player extends Entity implements IEntity {
 
-    private String keyPressed = "";
-    private String fireKeyPressed = "";
     private String directionFacing = "";
     private double projectileHp = 2;
 
     private ArrayList<String> movements = new ArrayList<String>();
+    private ArrayList<String> fireKeys = new ArrayList<>();
 
     /**
      * Constructor for a player object
@@ -129,21 +128,6 @@ public class Player extends Entity implements IEntity {
         System.out.println("New X: " + this.currentX + " New Y: " + this.currentY);
     }
 
-    /**
-     * @return - A string representation of the key that was pressed
-     */
-    public String getKeyPressed() {
-        return keyPressed;
-    }
-
-    /**
-     * @param keyPressed
-     *            - The key that was pressed to be set
-     */
-    public void setKeyPressed(String keyPressed) {
-        this.keyPressed = keyPressed;
-    }
-
     /*
      * (non-Javadoc)
      * 
@@ -152,8 +136,9 @@ public class Player extends Entity implements IEntity {
     @Override
     public IEntity fireProjectile() {
         IEntity temp = null;
-        if (!this.fireKeyPressed.equals("")) {
-            switch (this.fireKeyPressed) {
+        if (!fireKeys.isEmpty()) {
+        	String tempKey = fireKeys.get(fireKeys.size()-1);
+            switch (tempKey) {
             case "UP":
                 temp = new Projectile(this.projectileHp, true, this.currentX, this.currentY, new Point2D(0, 1));
                 break;
@@ -169,6 +154,7 @@ public class Player extends Entity implements IEntity {
             default:
                 break;
             }
+        
         }
         return temp;
     }
@@ -223,21 +209,6 @@ public class Player extends Entity implements IEntity {
         return false;
     }
 
-    /**
-     * @return - The direction that the projectile will be fired in
-     */
-    public String getFireKeyPressed() {
-        return fireKeyPressed;
-    }
-
-    /**
-     * @param fireKeyPressed
-     *            - The direction of the projectile to be set
-     */
-    public void setFireKeyPressed(String fireKeyPressed) {
-        this.fireKeyPressed = fireKeyPressed;
-    }
-
     /*
      * (non-Javadoc)
      * 
@@ -283,5 +254,13 @@ public class Player extends Entity implements IEntity {
     public void setMovements(ArrayList<String> movements) {
         this.movements = movements;
     }
+
+	public ArrayList<String> getFireKeys() {
+		return fireKeys;
+	}
+
+	public void setFireKeys(ArrayList<String> fireKeys) {
+		this.fireKeys = fireKeys;
+	}
 
 }

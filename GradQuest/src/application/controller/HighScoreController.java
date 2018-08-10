@@ -18,6 +18,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 /**
+ * Handles the data between the view and the controller
  * @author Rafael Rodriguez - mat574
  *
  */

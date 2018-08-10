@@ -11,6 +11,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
+ * Starts the app and hold a few constants
+ * 
  * @author Rafael Rodriguez - mat574
  * @author David Brenner - iqc287
  *

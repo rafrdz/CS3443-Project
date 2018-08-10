@@ -15,7 +15,7 @@ import javafx.scene.layout.AnchorPane;
  */
 public class Enemy extends Entity implements IEntity {
 
-    /**
+    /** Constructor
      * @param x
      * @param y
      * @param imageView

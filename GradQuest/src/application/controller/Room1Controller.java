@@ -103,23 +103,34 @@ public class Room1Controller implements Initializable {
                     }
                 }
                 if (frames % 10 == 0) {
-                    updateKeyPressEvent();
                     fireProjectiles();
+                }
+                
+                if (frames % 30 == 0) {
+                    removeOffScreenProjectiles();
                 }
                 frames++;
             }
         }.start();
     }
 
-    protected void updateKeyPressEvent() {
-        /*
-         * if(!keyPress.equals(player.getKeyPressed())){ player.setKeyPressed(keyPress);
-         * }
-         */
-
-    }
-
     /**
+     * Removes projectiles that have gone off the screen.
+     */
+    protected void removeOffScreenProjectiles() {
+    	ArrayList<Integer> removedIndexes = new ArrayList<Integer>();
+        for (int i = 0; entities.size() > i; i++) {
+            if (entities.get(i) instanceof Projectile && entities.get(i).needToRemove()) {
+                removedIndexes.add(i);
+            }
+        }
+        for(int i = removedIndexes.size()-1;i > 0; i--){
+        	bottomPane.getChildren().remove(entities.get(removedIndexes.get(i)).getImageView());
+            entities.remove(entities.get(removedIndexes.get(i)));
+        }
+	}
+
+	/**
      * Returns the user to the starting view
      */
     public void returnHome() {
@@ -131,18 +142,15 @@ public class Room1Controller implements Initializable {
      */
     protected void fireProjectiles() {
         ArrayList<IEntity> newProjectiles = new ArrayList<IEntity>();
-        for (IEntity entity : entities) {
-            if (!(entity instanceof Player)) {
-                IEntity newEnitity = checkForNewProjectile(entity);
-                if (newEnitity != null) {
-                    newProjectiles.add(newEnitity);
-                }
-            }
+        IEntity newEnitity = checkForNewProjectile(player);
+        if (newEnitity != null) {
+            newProjectiles.add(newEnitity);
         }
         entities.addAll(newProjectiles);
     }
 
     /**
+     * Check to see if a new projectile should be created and displayed on the screen
      * @param entity
      * @return
      */
@@ -163,35 +171,11 @@ public class Room1Controller implements Initializable {
      * Updates all of the entities on the current view
      */
     protected void update() {
-        ArrayList<IEntity> newProjectiles = new ArrayList<IEntity>();
-        if (player.getFireKeyPressed() != "") {
-            for (IEntity entity : entities) {
-                if (entity instanceof Player) {
-                    IEntity newEnitity = checkForNewProjectile(entity);
-                    if (newEnitity != null) {
-                        newProjectiles.add(newEnitity);
-                        player.setFireKeyPressed("");
-                    }
-                }
-            }
-        }
-        entities.addAll(newProjectiles);
-
-        ArrayList<Integer> removedIndexes = new ArrayList<Integer>();
         for (int i = 0; entities.size() > i; i++) {
             entities.get(i).move();
             if (entities.get(i) instanceof Player) {
                 leaveRoom = checkLeaveRoom();
             }
-            if (entities.get(i) instanceof Projectile && entities.get(i).needToRemove()) {
-                System.out.println("Removing");
-                removedIndexes.add(i);
-            }
-        }
-        for (Integer integer : removedIndexes) {
-            System.out.println(integer);
-            bottomPane.getChildren().remove(entities.get(integer).getImageView());
-            entities.remove(entities.get(integer));
         }
         checkForCollisions();
         boolean enemiesLeft = false;
@@ -217,9 +201,9 @@ public class Room1Controller implements Initializable {
                     projectilesIndexs.add(i);
                 }
             }
-            for (Integer integer : projectilesIndexs) {
-                bottomPane.getChildren().remove(projectiles.get(integer).getImageView());
-                entities.remove(projectiles.get(integer));
+            for(int i = projectilesIndexs.size()-1;i > 0; i--){
+            	bottomPane.getChildren().remove(entities.get(projectilesIndexs.get(i)).getImageView());
+                entities.remove(entities.get(projectilesIndexs.get(i)));
             }
 
             ArrayList<IEntity> arrayList = EnemyGroup.loadEnemies(IntroController.difficulty, roomNumber, bottomPane);
@@ -249,7 +233,6 @@ public class Room1Controller implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        player.setKeyPressed("");
         gameOver = true;
         Main.moveToNextView("../application/views/HighScore.fxml");
     }
@@ -336,7 +319,14 @@ public class Room1Controller implements Initializable {
             if (player.getMovements().contains(event.getCode().toString())) {
                 player.getMovements().remove(event.getCode().toString());
             }
-            // keyPress = "";
+            break;
+        case UP:
+        case DOWN:
+        case RIGHT:
+        case LEFT:
+        	if (player.getFireKeys().contains(event.getCode().toString())) {
+                player.getFireKeys().remove(event.getCode().toString());
+            }
             break;
         default:
             break;
@@ -350,7 +340,6 @@ public class Room1Controller implements Initializable {
      *            - The input from the user
      */
     public void handleKeyPressed(KeyEvent event) {
-        String keyPressed = event.getCode().toString();
         switch (event.getCode()) {
         case A:
         case W:
@@ -364,7 +353,9 @@ public class Room1Controller implements Initializable {
         case DOWN:
         case RIGHT:
         case LEFT:
-            player.setFireKeyPressed(keyPressed);
+        	if (!player.getFireKeys().contains(event.getCode().toString())) {
+                player.getFireKeys().add(event.getCode().toString());
+            }
             break;
         default:
             break;

@@ -7,6 +7,7 @@ import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 
 /**
+ * Supports SpriteAnimation for each entity that can be displayed on the screen
  * @author David Brenner - iqc287
  *
  */
@@ -23,6 +24,7 @@ public class SpriteAnimation extends Transition {
     private int lastIndex;
 
     /**
+     * Method that displays the sprite sheet section for the animation
      * @param imageView
      * @param duration
      * @param count

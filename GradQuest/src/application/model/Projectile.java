@@ -6,6 +6,7 @@ import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 
 /**
+ * Concrete class for plasma rays
  * @author David Brenner - iqc287
  *
  */

@@ -6,6 +6,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
 /**
+ * Abstract class non static object on the viewing port
  * @author David Brenner - iqc287
  * @author Rafael Rodriguez - mat574
  *
